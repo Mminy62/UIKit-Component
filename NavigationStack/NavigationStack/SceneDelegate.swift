@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 기기별 윈도우 사이즈 맞추기 가능
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = FirstScreen()
+        window?.rootViewController = UINavigationController(rootViewController: FirstScreen())
         window?.makeKeyAndVisible()
          
         

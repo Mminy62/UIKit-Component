@@ -16,6 +16,8 @@ class FirstScreen: UIViewController {
         setupButton()
         view.backgroundColor = .systemBackground
         title = "First Screen"
+        // title font -> large
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func setupButton() {
@@ -25,10 +27,15 @@ class FirstScreen: UIViewController {
         nextButton.configuration?.baseBackgroundColor = .systemPink
         nextButton.configuration?.title = "Next"
         
+        // for: normal tab action
+        // addTarget: set up action
+        nextButton.addTarget(self, action: #selector(goToNextScreen), for: .touchUpInside)
+        
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         // standard => view centerX
-//        nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+        // NSLayoutContraint 방법
+        // view constraint
         NSLayoutConstraint.activate([
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -36,7 +43,14 @@ class FirstScreen: UIViewController {
             nextButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        
+        // NSLayoutAnchor 방법
+        //        nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    @objc func goToNextScreen() {
+        let nextScreen = SecondScreen()
+        nextScreen.title = "Second Screen"
+        navigationController?.pushViewController(nextScreen, animated: true)
     }
 
 }

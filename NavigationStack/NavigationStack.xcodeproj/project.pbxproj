@@ -12,6 +12,7 @@
 		D234F25D2BF108B700612030 /* FirstScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F25C2BF108B700612030 /* FirstScreen.swift */; };
 		D234F2622BF108B800612030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D234F2612BF108B800612030 /* Assets.xcassets */; };
 		D234F2652BF108B800612030 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D234F2642BF108B800612030 /* Base */; };
+		D234F26D2BF1128500612030 /* SecondScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F26C2BF1128500612030 /* SecondScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D234F2612BF108B800612030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D234F2642BF108B800612030 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D234F2662BF108B800612030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D234F26C2BF1128500612030 /* SecondScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				D234F2582BF108B700612030 /* AppDelegate.swift */,
 				D234F25A2BF108B700612030 /* SceneDelegate.swift */,
 				D234F25C2BF108B700612030 /* FirstScreen.swift */,
+				D234F26C2BF1128500612030 /* SecondScreen.swift */,
 				D234F2612BF108B800612030 /* Assets.xcassets */,
 				D234F2632BF108B800612030 /* LaunchScreen.storyboard */,
 				D234F2662BF108B800612030 /* Info.plist */,
@@ -135,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D234F25D2BF108B700612030 /* FirstScreen.swift in Sources */,
+				D234F26D2BF1128500612030 /* SecondScreen.swift in Sources */,
 				D234F2592BF108B700612030 /* AppDelegate.swift in Sources */,
 				D234F25B2BF108B700612030 /* SceneDelegate.swift in Sources */,
 			);
