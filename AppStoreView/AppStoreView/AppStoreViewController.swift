@@ -54,8 +54,11 @@ class AppStoreViewController: UIViewController {
         ])
         
         collectionView.dataSource = self
+        // collectionView에 등록
+        // 각 셀들에 대한 constraint기록된 정보들
         collectionView.register(FeaturedAppsCell.self, forCellWithReuseIdentifier: FeaturedAppsCell.identifier)
         collectionView.register(FreeAppCell.self, forCellWithReuseIdentifier: FreeAppCell.identifier)
+        collectionView.register(HeaderSupplementaryCell.self, forSupplementaryViewOfKind: HeaderSupplementaryCell.kind, withReuseIdentifier: HeaderSupplementaryCell.identifier)
     }
 
 }
@@ -88,5 +91,13 @@ extension AppStoreViewController: UICollectionViewDataSource {
             cell.item = topFreeApps[indexPath.row]
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: HeaderSupplementaryCell.kind, withReuseIdentifier: HeaderSupplementaryCell.identifier, for: indexPath) as! HeaderSupplementaryCell
+        
+        supplementaryView.label.text = "Top Free Apps"
+        
+        return supplementaryView
     }
 }

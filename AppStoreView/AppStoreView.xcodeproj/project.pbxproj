@@ -21,6 +21,7 @@
 		D234F2DE2BF12BC800612030 /* FreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2DD2BF12BC800612030 /* FreeApp.swift */; };
 		D234F2E12BF12DE200612030 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D234F2E02BF12DE200612030 /* Kingfisher */; };
 		D234F2E42BF2090900612030 /* CompositionalLayoutSectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2E32BF2090900612030 /* CompositionalLayoutSectionHelper.swift */; };
+		D234F2E62BF2774E00612030 /* HeaderSupplementaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2E52BF2774E00612030 /* HeaderSupplementaryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		D234F2DB2BF12BA000612030 /* FeaturedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedApp.swift; sourceTree = "<group>"; };
 		D234F2DD2BF12BC800612030 /* FreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeApp.swift; sourceTree = "<group>"; };
 		D234F2E32BF2090900612030 /* CompositionalLayoutSectionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutSectionHelper.swift; sourceTree = "<group>"; };
+		D234F2E52BF2774E00612030 /* HeaderSupplementaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSupplementaryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			children = (
 				D234F2CF2BF12AC400612030 /* FeaturedAppsCell.swift */,
 				D234F2D82BF12B5A00612030 /* FreeAppCell.swift */,
+				D234F2E52BF2774E00612030 /* HeaderSupplementaryCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				D234F2DE2BF12BC800612030 /* FreeApp.swift in Sources */,
 				D234F2BF2BF1257100612030 /* AppStoreViewController.swift in Sources */,
 				D234F2D02BF12AC400612030 /* FeaturedAppsCell.swift in Sources */,
+				D234F2E62BF2774E00612030 /* HeaderSupplementaryCell.swift in Sources */,
 				D234F2BB2BF1257100612030 /* AppDelegate.swift in Sources */,
 				D234F2DC2BF12BA000612030 /* FeaturedApp.swift in Sources */,
 				D234F2E42BF2090900612030 /* CompositionalLayoutSectionHelper.swift in Sources */,

@@ -41,6 +41,17 @@ class CompositionalLayoutSectionHelper {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         
+        let supplementaryItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
+        
+        section.boundarySupplementaryItems = [
+            NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: supplementaryItemSize, 
+                elementKind: HeaderSupplementaryCell.kind,
+                alignment: .topLeading
+            )
+        
+        ]
+        
         return section
     }
     
