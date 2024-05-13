@@ -19,7 +19,7 @@ class AppStoreViewController: UIViewController {
                 
             case 0: return CompositionalLayoutSectionHelper.createFeaturedAppsSection()
                 
-            case 1: return nil
+            case 1: return CompositionalLayoutSectionHelper.createTopFreeAppsSection()
             
             default: return nil
             }
