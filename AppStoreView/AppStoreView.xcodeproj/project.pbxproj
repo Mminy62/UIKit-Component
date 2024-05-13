@@ -12,6 +12,14 @@
 		D234F2BF2BF1257100612030 /* AppStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2BE2BF1257100612030 /* AppStoreViewController.swift */; };
 		D234F2C42BF1257200612030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D234F2C32BF1257200612030 /* Assets.xcassets */; };
 		D234F2C72BF1257200612030 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D234F2C62BF1257200612030 /* Base */; };
+		D234F2D02BF12AC400612030 /* FeaturedAppsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2CF2BF12AC400612030 /* FeaturedAppsCell.swift */; };
+		D234F2D32BF12B3800612030 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = D234F2D22BF12B3800612030 /* Nuke */; };
+		D234F2D52BF12B3800612030 /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = D234F2D42BF12B3800612030 /* NukeExtensions */; };
+		D234F2D72BF12B3800612030 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = D234F2D62BF12B3800612030 /* NukeUI */; };
+		D234F2D92BF12B5A00612030 /* FreeAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2D82BF12B5A00612030 /* FreeAppCell.swift */; };
+		D234F2DC2BF12BA000612030 /* FeaturedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2DB2BF12BA000612030 /* FeaturedApp.swift */; };
+		D234F2DE2BF12BC800612030 /* FreeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F2DD2BF12BC800612030 /* FreeApp.swift */; };
+		D234F2E12BF12DE200612030 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D234F2E02BF12DE200612030 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,10 @@
 		D234F2C32BF1257200612030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D234F2C62BF1257200612030 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D234F2C82BF1257200612030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D234F2CF2BF12AC400612030 /* FeaturedAppsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedAppsCell.swift; sourceTree = "<group>"; };
+		D234F2D82BF12B5A00612030 /* FreeAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeAppCell.swift; sourceTree = "<group>"; };
+		D234F2DB2BF12BA000612030 /* FeaturedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedApp.swift; sourceTree = "<group>"; };
+		D234F2DD2BF12BC800612030 /* FreeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +41,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D234F2E12BF12DE200612030 /* Kingfisher in Frameworks */,
+				D234F2D72BF12B3800612030 /* NukeUI in Frameworks */,
+				D234F2D32BF12B3800612030 /* Nuke in Frameworks */,
+				D234F2D52BF12B3800612030 /* NukeExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +70,8 @@
 		D234F2B92BF1257100612030 /* AppStoreView */ = {
 			isa = PBXGroup;
 			children = (
+				D234F2DA2BF12B6C00612030 /* Models */,
+				D234F2CE2BF12A9F00612030 /* Cells */,
 				D234F2BA2BF1257100612030 /* AppDelegate.swift */,
 				D234F2BC2BF1257100612030 /* SceneDelegate.swift */,
 				D234F2BE2BF1257100612030 /* AppStoreViewController.swift */,
@@ -62,6 +80,24 @@
 				D234F2C82BF1257200612030 /* Info.plist */,
 			);
 			path = AppStoreView;
+			sourceTree = "<group>";
+		};
+		D234F2CE2BF12A9F00612030 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D234F2CF2BF12AC400612030 /* FeaturedAppsCell.swift */,
+				D234F2D82BF12B5A00612030 /* FreeAppCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D234F2DA2BF12B6C00612030 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D234F2DB2BF12BA000612030 /* FeaturedApp.swift */,
+				D234F2DD2BF12BC800612030 /* FreeApp.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +116,12 @@
 			dependencies = (
 			);
 			name = AppStoreView;
+			packageProductDependencies = (
+				D234F2D22BF12B3800612030 /* Nuke */,
+				D234F2D42BF12B3800612030 /* NukeExtensions */,
+				D234F2D62BF12B3800612030 /* NukeUI */,
+				D234F2E02BF12DE200612030 /* Kingfisher */,
+			);
 			productName = AppStoreView;
 			productReference = D234F2B72BF1257100612030 /* AppStoreView.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +150,10 @@
 				Base,
 			);
 			mainGroup = D234F2AE2BF1257100612030;
+			packageReferences = (
+				D234F2D12BF12B3800612030 /* XCRemoteSwiftPackageReference "Nuke" */,
+				D234F2DF2BF12DE200612030 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = D234F2B82BF1257100612030 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,9 +180,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D234F2DE2BF12BC800612030 /* FreeApp.swift in Sources */,
 				D234F2BF2BF1257100612030 /* AppStoreViewController.swift in Sources */,
+				D234F2D02BF12AC400612030 /* FeaturedAppsCell.swift in Sources */,
 				D234F2BB2BF1257100612030 /* AppDelegate.swift in Sources */,
+				D234F2DC2BF12BA000612030 /* FeaturedApp.swift in Sources */,
 				D234F2BD2BF1257100612030 /* SceneDelegate.swift in Sources */,
+				D234F2D92BF12B5A00612030 /* FreeAppCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +399,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D234F2D12BF12B3800612030 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.6.0;
+			};
+		};
+		D234F2DF2BF12DE200612030 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D234F2D22BF12B3800612030 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D234F2D12BF12B3800612030 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		D234F2D42BF12B3800612030 /* NukeExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D234F2D12BF12B3800612030 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeExtensions;
+		};
+		D234F2D62BF12B3800612030 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D234F2D12BF12B3800612030 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+		D234F2E02BF12DE200612030 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D234F2DF2BF12DE200612030 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D234F2AF2BF1257100612030 /* Project object */;
 }

@@ -1,0 +1,24 @@
+{
+  "originHash" : "051853cc1840219b8f67f9f375b0a0221300a84878e4102d8dcdc8fb1a121698",
+  "pins" : [
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
+        "version" : "7.11.0"
+      }
+    },
+    {
+      "identity" : "nuke",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Nuke",
+      "state" : {
+        "revision" : "8e431251dea0081b6ab154dab61a6ec74e4b6577",
+        "version" : "12.6.0"
+      }
+    }
+  ],
+  "version" : 3
+}
