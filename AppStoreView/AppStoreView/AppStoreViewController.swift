@@ -12,8 +12,16 @@ class AppStoreViewController: UIViewController {
     // uiview controller 안에 collection view 넣기
     private lazy var collectionView: UICollectionView = {
         
-        let layout = UICollectionViewFlowLayout() // CollectionView layout object
-        layout.itemSize = .init(width: 350, height: 200)
+        // one item size
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        // item을 포함하는 group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(300))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
