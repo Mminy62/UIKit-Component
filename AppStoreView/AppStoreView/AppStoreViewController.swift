@@ -31,16 +31,18 @@ class AppStoreViewController: UIViewController {
         return collectionView
     }()
 
+    // CollectionView의 constraint 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "App Store"
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        setupCollectionView()
         
+        setupCollectionView()
     }
     
+    // constraint 설정
     func setupCollectionView() {
         view.addSubview(collectionView)
         // 화면 꽉 차게 세팅
@@ -53,26 +55,38 @@ class AppStoreViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.register(FeaturedAppsCell.self, forCellWithReuseIdentifier: FeaturedAppsCell.identifier)
-        
+        collectionView.register(FreeAppCell.self, forCellWithReuseIdentifier: FreeAppCell.identifier)
     }
 
 }
 
 extension AppStoreViewController: UICollectionViewDataSource {
     
+    // section 2개이므로 변경
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        featuredApps.count
+
+        if section == 0 {
+            return featuredApps.count
+        } else {
+            return topFreeApps.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // indexPath: 셀의 위치를 특정
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedAppsCell.identifier, for: indexPath) as! FeaturedAppsCell
-        cell.featuredApppItem = featuredApps[indexPath.row]
-        
-        return cell
+
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedAppsCell.identifier, for: indexPath) as! FeaturedAppsCell
+            cell.featuredApppItem = featuredApps[indexPath.row]
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FreeAppCell.identifier, for: indexPath) as! FreeAppCell
+            cell.item = topFreeApps[indexPath.row]
+            return cell
+        }
     }
 }

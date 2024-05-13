@@ -36,7 +36,10 @@ class CompositionalLayoutSectionHelper {
         // item을 포함하는 group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(300))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [groupItem])
+        group.contentInsets.top = 16.0
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
         
         return section
     }
