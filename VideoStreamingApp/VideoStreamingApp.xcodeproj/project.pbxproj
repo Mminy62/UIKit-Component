@@ -14,6 +14,9 @@
 		D220CDCB2BEE9C950049F434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D220CDCA2BEE9C950049F434 /* Assets.xcassets */; };
 		D220CDCE2BEE9C950049F434 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D220CDCD2BEE9C950049F434 /* Base */; };
 		D2BE8BA62C0491E9008E5817 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2BE8BA52C0491E9008E5817 /* Colors.xcassets */; };
+		D2FA10C62C04D5FB0098B622 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FA10C52C04D5FB0098B622 /* HomeViewController.swift */; };
+		D2FA10CC2C04D9FA0098B622 /* HomeVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FA10CA2C04D9FA0098B622 /* HomeVideoCell.swift */; };
+		D2FA10CD2C04D9FA0098B622 /* HomeVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FA10CB2C04D9FA0098B622 /* HomeVideoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		D220CDCD2BEE9C950049F434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D220CDCF2BEE9C950049F434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2BE8BA52C0491E9008E5817 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		D2FA10C52C04D5FB0098B622 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D2FA10CA2C04D9FA0098B622 /* HomeVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVideoCell.swift; sourceTree = "<group>"; };
+		D2FA10CB2C04D9FA0098B622 /* HomeVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVideoCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +64,11 @@
 		D220CDC02BEE9C940049F434 /* VideoStreamingApp */ = {
 			isa = PBXGroup;
 			children = (
+				D2FA10C72C04D9B40098B622 /* Cell */,
+				D2FA10C42C04D5DB0098B622 /* Home */,
+				D2FA10C32C04D5CE0098B622 /* Login */,
 				D220CDC12BEE9C940049F434 /* AppDelegate.swift */,
 				D220CDC32BEE9C940049F434 /* SceneDelegate.swift */,
-				D220CDC52BEE9C940049F434 /* LoginViewController.swift */,
 				D220CDC72BEE9C940049F434 /* Main.storyboard */,
 				D220CDCA2BEE9C950049F434 /* Assets.xcassets */,
 				D2BE8BA52C0491E9008E5817 /* Colors.xcassets */,
@@ -68,6 +76,31 @@
 				D220CDCF2BEE9C950049F434 /* Info.plist */,
 			);
 			path = VideoStreamingApp;
+			sourceTree = "<group>";
+		};
+		D2FA10C32C04D5CE0098B622 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D220CDC52BEE9C940049F434 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D2FA10C42C04D5DB0098B622 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D2FA10C52C04D5FB0098B622 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D2FA10C72C04D9B40098B622 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D2FA10CA2C04D9FA0098B622 /* HomeVideoCell.swift */,
+				D2FA10CB2C04D9FA0098B622 /* HomeVideoCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +164,7 @@
 				D220CDCB2BEE9C950049F434 /* Assets.xcassets in Resources */,
 				D2BE8BA62C0491E9008E5817 /* Colors.xcassets in Resources */,
 				D220CDCE2BEE9C950049F434 /* Base in Resources */,
+				D2FA10CD2C04D9FA0098B622 /* HomeVideoCell.xib in Resources */,
 				D220CDC92BEE9C940049F434 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +179,8 @@
 				D220CDC62BEE9C940049F434 /* LoginViewController.swift in Sources */,
 				D220CDC22BEE9C940049F434 /* AppDelegate.swift in Sources */,
 				D220CDC42BEE9C940049F434 /* SceneDelegate.swift in Sources */,
+				D2FA10CC2C04D9FA0098B622 /* HomeVideoCell.swift in Sources */,
+				D2FA10C62C04D5FB0098B622 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -85,17 +86,32 @@
             </objects>
             <point key="canvasLocation" x="1963" y="880"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="I6m-ED-sdw">
             <objects>
-                <viewController id="asU-B7-TvN" sceneMemberID="viewController">
+                <viewController id="asU-B7-TvN" customClass="HomeViewController" customModule="VideoStreamingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kGw-Pr-sp9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LpP-KD-EYS">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="1ll-XL-839"/>
                         <color key="backgroundColor" name="bg"/>
+                        <constraints>
+                            <constraint firstItem="LpP-KD-EYS" firstAttribute="leading" secondItem="1ll-XL-839" secondAttribute="leading" id="Cca-lW-5EQ"/>
+                            <constraint firstItem="1ll-XL-839" firstAttribute="trailing" secondItem="LpP-KD-EYS" secondAttribute="trailing" id="EKM-Df-s3f"/>
+                            <constraint firstItem="LpP-KD-EYS" firstAttribute="top" secondItem="1ll-XL-839" secondAttribute="top" id="HHb-Em-nPh"/>
+                            <constraint firstItem="1ll-XL-839" firstAttribute="bottom" secondItem="LpP-KD-EYS" secondAttribute="bottom" id="Slu-5T-4aw"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tabIcon_home" selectedImage="tabIcon_home_selected" id="5yT-K4-2E6"/>
+                    <connections>
+                        <outlet property="tableView" destination="LpP-KD-EYS" id="l3W-95-qPa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kj0-I7-dWC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -149,5 +165,8 @@
         <namedColor name="stroke-light">
             <color red="0.34509803921568627" green="0.34509803921568627" blue="0.34509803921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
