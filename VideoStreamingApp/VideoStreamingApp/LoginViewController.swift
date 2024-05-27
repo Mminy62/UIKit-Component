@@ -20,6 +20,8 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func buttonDidTap(_ sender: Any) {
+        // window의 시작인 root view controller의 시작을 tabbar view controller로 지정한 것
+        self.view.window?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "tabbar")
     }
 }
 
