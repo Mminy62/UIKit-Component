@@ -141,6 +141,16 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="channelImageView" destination="7R6-bp-6aM" id="PLW-mf-A80"/>
+                <outlet property="channelSubtitleLabel" destination="Ps6-FU-fXO" id="F8R-GQ-sbU"/>
+                <outlet property="channelTitleLabel" destination="DOa-c6-cdE" id="5Mg-a1-hhZ"/>
+                <outlet property="containerView" destination="MNn-rN-5ic" id="sem-hc-VJ6"/>
+                <outlet property="hotImageView" destination="vDj-rr-E7r" id="Zt6-c7-aoh"/>
+                <outlet property="subtitleLabel" destination="LrO-tV-9Ig" id="4tj-Lk-9bf"/>
+                <outlet property="thumbnailImageView" destination="H42-x9-j02" id="cD2-0T-MlZ"/>
+                <outlet property="titleLabel" destination="dOw-PK-bCh" id="x6x-rE-RNc"/>
+            </connections>
             <point key="canvasLocation" x="118.32061068702289" y="20.422535211267608"/>
         </tableViewCell>
     </objects>

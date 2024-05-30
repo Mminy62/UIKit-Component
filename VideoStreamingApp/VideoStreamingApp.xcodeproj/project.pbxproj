@@ -64,7 +64,6 @@
 		D220CDC02BEE9C940049F434 /* VideoStreamingApp */ = {
 			isa = PBXGroup;
 			children = (
-				D2FA10C72C04D9B40098B622 /* Cell */,
 				D2FA10C42C04D5DB0098B622 /* Home */,
 				D2FA10C32C04D5CE0098B622 /* Login */,
 				D220CDC12BEE9C940049F434 /* AppDelegate.swift */,
@@ -89,6 +88,7 @@
 		D2FA10C42C04D5DB0098B622 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D2FA10C72C04D9B40098B622 /* Cell */,
 				D2FA10C52C04D5FB0098B622 /* HomeViewController.swift */,
 			);
 			path = Home;
