@@ -9,6 +9,9 @@ import UIKit
 
 class HomeVideoCell: UITableViewCell {
     
+    static let identifier = "HomeVideoCell"
+    static let height: CGFloat = 321
+    
     @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -31,7 +34,7 @@ class HomeVideoCell: UITableViewCell {
         self.containerView.layer.cornerRadius = 10
         self.containerView.layer.borderColor = UIColor(named: "stroke-light")?.cgColor
         self.containerView.layer.borderWidth = 1
-        
+        self.containerView.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
