@@ -44,7 +44,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch section {
         case .video:
-            return 3
+            return 2
         }
     }
     
