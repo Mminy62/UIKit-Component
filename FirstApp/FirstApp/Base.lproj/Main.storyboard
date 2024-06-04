@@ -29,7 +29,17 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Aw-Ba-RqL"/>
+                                </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qGD-vP-G5b">
+                                <rect key="frame" x="76.666666666666686" y="403" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="4iv-T5-nfg"/>
+                                    <constraint firstAttribute="height" constant="128" id="XYB-nh-vfN"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="반갑습니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hs-gV-LNc">
                                 <rect key="frame" x="96.666666666666686" y="299" width="200" height="35"/>
                                 <constraints>
@@ -47,9 +57,16 @@
                             <constraint firstItem="2z6-B0-RBa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Go2-3l-0Gr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2z6-B0-RBa" secondAttribute="bottom" constant="100" id="IAT-wT-wwY"/>
                             <constraint firstItem="4Hs-gV-LNc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RWe-iC-tdk"/>
+                            <constraint firstItem="qGD-vP-G5b" firstAttribute="top" secondItem="4Hs-gV-LNc" secondAttribute="bottom" constant="69" id="b3S-si-J0W"/>
                             <constraint firstItem="4Hs-gV-LNc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="240" id="qVR-rQ-md8"/>
+                            <constraint firstItem="qGD-vP-G5b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ref-N5-XCC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="qGD-vP-G5b" id="aHf-9G-EOd"/>
+                        <outlet property="mainLabel" destination="4Hs-gV-LNc" id="LGU-1n-dKi"/>
+                        <outlet property="myButton" destination="2z6-B0-RBa" id="5Rf-g2-GVQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
