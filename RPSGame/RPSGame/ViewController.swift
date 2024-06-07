@@ -59,8 +59,6 @@ class ViewController: UIViewController {
     
     @IBAction func selectButtonTapped(_ sender: UIButton) {
         // 내가 선택한 것과 컴퓨터가 선택한 것을 같이 표시
-        // 이겼는지 졌는지 판단 -> 표시
-        
         switch comChoice {
         case RPS.rock:
             comImageView.image = UIImage(named: "rock.png")
@@ -85,12 +83,38 @@ class ViewController: UIViewController {
             myChoiceLabel.text="가위"
         }
         
+        // 이겼는지 졌는지 판단 -> 표시
+        if comChoice == myChoice {
+            mainLabel.text = "비겼다"
+        } else if comChoice == .rock && myChoice == .paper {
+            mainLabel.text = "이겼다"
+        } else if comChoice == .scissors && myChoice == .rock {
+            mainLabel.text = "이겼다"
+        } else if comChoice == .paper && myChoice == .scissors {
+            mainLabel.text = "이겼다"
+        } else {
+            mainLabel.text = "졌다"
+        }
+        
+        
+        
     }
     
     
     @IBAction func resetButtonTapped(_ sender: UIButton) {
         // 1) 첫번째/두번째 이미지뷰에 준비 이미지를 띄워야함
         // 2) 첫번째/두번재 레이블에 "준비"라고 문자열을 띄워야함
+        comImageView.image = UIImage(named: "ready.png")
+        myImageView.image = UIImage(named: "ready.png")
+        
+        comChoiceLabel.text = "준비"
+        myChoiceLabel.text = "준비"
+        
+        mainLabel.text = "선택하세요"
+        
+        // 컴퓨터가 다시 랜덤 가위바위보를 선택하고 저장
+        comChoice = RPS(rawValue: Int.random(in: 0...2))!
+    
     }
     
     
