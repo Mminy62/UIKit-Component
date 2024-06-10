@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     
+    
+    @IBOutlet var buttonPads: [UIButton]!
     // 함수안의 지역변수로 만들면 -> 메모리에서 스택프레임이 실행되는 동안에만 생겼다가 없어진다.
     var comNumber = Int.random(in: 1...10)
     var userNumber = 0
@@ -22,6 +24,11 @@ class ViewController: UIViewController {
         // 2) 숫자리에블은 ""
         mainLabel.text = "선택하세요"
         numberLabel.text = ""
+        
+        for button in buttonPads {
+            button.layer.cornerRadius = 10
+            button.clipsToBounds = true
+        }
     }
 
     @IBAction func buttonTapped(_ sender: UIButton) {
@@ -63,4 +70,3 @@ class ViewController: UIViewController {
     
     
 }
-
