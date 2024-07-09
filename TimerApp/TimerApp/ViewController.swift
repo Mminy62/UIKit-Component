@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
-
     
     @IBOutlet weak var mainLabel: UILabel!
-    
     @IBOutlet weak var slider: UISlider!
     private var timer: Timer?
     var number = 0
+    
+    let systemSoundID: SystemSoundID = 1013
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +35,13 @@ class ViewController: UIViewController {
 
     @IBAction func sliderChanged(_ sender: UISlider) {
         // 슬라이더의 벨류 값을 가지고 메인 레이블에 텍스트 세팅
-        let seconds = Int(slider.value * 60)
-        mainLabel.text = "\(seconds) 초"
-        number = seconds
+        number = Int(slider.value * 60)
+        mainLabel.text = "\(number) 초"
     }
     
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
         // 1초마다 타이머 실행
-        
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] _ in
             // closure 시작점에 self를 붙이면, 클로저 내부 속성들에 Self를 안붙여도 된다.
@@ -56,6 +55,7 @@ class ViewController: UIViewController {
                 mainLabel.text = "\(number) 초"
                 
             } else {
+                AudioServicesPlaySystemSound(systemSoundID)
                 number = 0
                 mainLabel.text = "초를 선택하세요"
                 timer?.invalidate() // stop timer 기능인, timer를 비활성화 해주는 것을 사용해야한다.
@@ -68,7 +68,8 @@ class ViewController: UIViewController {
     @IBAction func resetButtonTapped(_ sender: UIButton) {
         mainLabel.text = "초를 선택하세요"
         slider.setValue(0.5, animated: true)
-        
+        timer?.invalidate()
+        number = 0
     }
 }
 
