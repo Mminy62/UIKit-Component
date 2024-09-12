@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         button.backgroundColor = .clear
         button.setTitle("비밀번호 재설정", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-//        button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -133,7 +133,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
     }
     
     func configureUI() {
@@ -151,9 +150,9 @@ class ViewController: UIViewController {
         passwordResetButton.translatesAutoresizingMaskIntoConstraints = false
         
         
-//        emailInfoLabel.leadingAnchor.constraint(equalTo: emailTextFieldView.leadingAnchor, constant: 8).isActive = true
-//        emailInfoLabel.trailingAnchor.constraint(equalTo: emailTextFieldView.trailingAnchor, constant: 8).isActive = true
-//        emailInfoLabel.centerYAnchor.constraint(equalTo: emailTextFieldView.centerYAnchor).isActive = true
+        //        emailInfoLabel.leadingAnchor.constraint(equalTo: emailTextFieldView.leadingAnchor, constant: 8).isActive = true
+        //        emailInfoLabel.trailingAnchor.constraint(equalTo: emailTextFieldView.trailingAnchor, constant: 8).isActive = true
+        //        emailInfoLabel.centerYAnchor.constraint(equalTo: emailTextFieldView.centerYAnchor).isActive = true
         
         NSLayoutConstraint.activate([
             // emailInfoLabel
@@ -173,7 +172,7 @@ class ViewController: UIViewController {
             passwordInfoLabel.topAnchor.constraint(equalTo: passwordTextFieldView.topAnchor, constant: 15),
             passwordInfoLabel.centerYAnchor.constraint(equalTo: passwordTextFieldView.centerYAnchor),
             
-    //        passwordInfoLabelCenterYConstraint.isActive = true
+            //        passwordInfoLabelCenterYConstraint.isActive = true
             
             
             // password text field
@@ -197,8 +196,25 @@ class ViewController: UIViewController {
             passwordResetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             passwordResetButton.heightAnchor.constraint(equalToConstant: textViewHeight),
         ])
+        
     }
+    
+    @objc func resetButtonTapped() {
+//        print("리셋 버튼이 눌렸습니다.")
+        let alert = UIAlertController(title: "비밀번호 바꾸기", message: "비밀번호를 바꾸시겠습니까?", preferredStyle: .alert)
+        let success = UIAlertAction(title: "확인", style: .default) { action in
+            print("확인버튼이 눌렸습니다.")
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { cancel in
+            print("취소버튼이 눌렸습니다.")
+        }
+        alert.addAction(success)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
 
-
+    
+    
 }
 

@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
-    private var timer: Timer?
+    weak var timer: Timer?
     var number = 0
     
     let systemSoundID: SystemSoundID = 1013
@@ -25,11 +25,6 @@ class ViewController: UIViewController {
     
     func configureUI() {
         mainLabel.text = "초를 선택하세요"
-        // 슬라이더의 가운데 설정
-//        slider.minimumValue = 0.0
-//        slider.maximumValue = 60.0
-//        slider.value = 30.0
-        
     }
 
 
