@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         tf.autocorrectionType = .no // 자동 수정
         tf.spellCheckingType = .no // 스펠링 체크
         tf.keyboardType = .emailAddress
+        tf.addTarget(self, action: #selector(textFieldEditingChanged(textField:)), for: .editingChanged)
         return tf
     }()
     
@@ -80,6 +81,7 @@ class ViewController: UIViewController {
         tf.spellCheckingType = .no // 스펠링 체크
         tf.isSecureTextEntry = true
         tf.clearsOnBeginEditing = false
+        tf.addTarget(self, action: #selector(textFieldEditingChanged(textField:)), for: .editingChanged)
         return tf
     }()
     
@@ -104,6 +106,7 @@ class ViewController: UIViewController {
         button.setTitle("로그인", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.isEnabled = false
+        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -211,6 +214,10 @@ class ViewController: UIViewController {
         passwordTextField.isSecureTextEntry.toggle()
     }
     
+    @objc func loginButtonTapped() {
+        print("login 버튼 tapped")
+    }
+    
     @objc func resetButtonTapped() {
 //        print("리셋 버튼이 눌렸습니다.")
         let alert = UIAlertController(title: "비밀번호 바꾸기", message: "비밀번호를 바꾸시겠습니까?", preferredStyle: .alert)
@@ -223,6 +230,11 @@ class ViewController: UIViewController {
         alert.addAction(success)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: 화면 터치시, 키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true) // First Responder가 다 사라지는 함수
     }
 
 }
@@ -271,7 +283,28 @@ extension ViewController: UITextFieldDelegate {
         UIView.animate(withDuration: 0.3) {
                 self.stackView.layoutIfNeeded()
         }
-        
     }
+    
+    // text를 입력할때마다, 두개의 textField 값에 값이 있는지 확인
+    // selector를 통해 전달 받는 것
+    @objc func textFieldEditingChanged(textField: UITextField){
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        
+        guard
+            let email = emailTextField.text, !email.isEmpty,
+            let password = passwordTextField.text, !password.isEmpty else {
+            loginButton.backgroundColor = .clear
+            loginButton.isEnabled = false
+            return
+        }
+        loginButton.backgroundColor = .red
+        loginButton.isEnabled = true
+    }
+    
 }
 
