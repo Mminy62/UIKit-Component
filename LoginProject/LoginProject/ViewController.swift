@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     // MARK: 이메일 입력하는 텍스트 뷰
     private lazy var emailTextFieldView: UIView = {
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
         return view
     }()
     
-    // 3개의 텍스트 필드 및 로그인 버튼 높이 설정
+    // 3개의 코텍스트 필드 및 로그인 버튼 높이 설정
     private let textViewHeight: CGFloat = 48
     
     // 오토레이아웃 향후 변경을 위한 변수(애니메이션)
