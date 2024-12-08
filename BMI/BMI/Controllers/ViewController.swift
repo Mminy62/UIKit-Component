@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var calculateButton: UIButton!
     
-//    var userBMI: BMI = BMI()
+    var bmi: BMI?
     var bmiManager = BMICalculatorManager()
     
     override func viewDidLoad() {
@@ -40,10 +40,7 @@ class ViewController: UIViewController {
     // secondViewController(받는 화면)에 받을 데이터 변수 선언 -> 
     @IBAction func calculateButtonTapped(_ sender: Any) {
         guard let height = heightTextField.text, let weight = weightTextField.text else { return }
-        bmiManager.bmi = bmiManager.calculateBMI(height: height, weight: weight)
-//        userBMI.bmi = calculateBMI(height: height, weight: weight)
-//        userBMI.adviceString = getBMIAdviceString()
-//        userBMI.adviceColor = getBackgroundColor()
+        bmi = bmiManager.getBMIResult(height: height, weight: weight)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -61,9 +58,7 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSecondVC" {
             let secondVC = segue.destination as! SecondViewController
-            secondVC.bmi = bmiManager.getBMIResult()
-            secondVC.adviceColor = bmiManager.getBackgroundColor()
-            secondVC.adviceString = bmiManager.getBMIAdviceString()
+            secondVC.bmi = bmi
         }
         // 다음 화면으로 넘어간 후엔 textfield 비우기
         heightTextField.text = ""
