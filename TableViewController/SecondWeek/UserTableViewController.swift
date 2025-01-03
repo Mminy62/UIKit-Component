@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 struct Friend {
     let name: String
@@ -15,29 +16,18 @@ struct Friend {
 
 class UserTableViewController: UITableViewController {
     
-    let friends: [Friend] = [
-        Friend(name: "고래밥", message: "냠냠", profile_image: "star"),
-        Friend(name: "칙촉", message: "행복한 하루", profile_image: "person"),
-        Friend(name: "카스타드", message: "배고파", profile_image: "pencil"),
-    ]
+    let friends = FriendsInfo().list
     
-    let name = ["고래밥", "칙촉", "카스타드"]
-    let message = ["고래밥 냠냠", "행복한 하루", "배고파"]
-    let profileImageName = ["star", "person", "pencil"]
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    // MARK: - Table view data source
-
+    
+    // MARK: TableView Data
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return friends.count
     }
     
@@ -46,16 +36,27 @@ class UserTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let friend = friends[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath) as! UserTableViewCell // index 번호까지 붙여서 확인
         cell.profileImageView.backgroundColor = .brown
-        cell.nameLabel.text = friends[indexPath.row].name
-        cell.messageLabel.text = friends[indexPath.row].message
-        cell.profileImageView.image = UIImage(systemName: friends[indexPath.row].profile_image)
+        cell.nameLabel.text = friend.name
+        cell.messageLabel.text = friend.message
+        
+        if let imageName = friend.profile_image {
+            cell.profileImageView.kf.setImage (
+                with: URL(string: imageName),
+                placeholder: UIImage(systemName: "star")
+            )
+        } else {
+            cell.profileImageView.image = UIImage(systemName: "person")
+        }
         
         cell.nameLabel.font = .boldSystemFont(ofSize: 14.0)
         cell.messageLabel.font = UIFont.systemFont(ofSize: 14.0)
+        cell.likeButton.setImage(UIImage(systemName: friend.like ? "heart.fill" : "heart"), for: .normal)
+        
         return cell
     }
-
+    
 }
