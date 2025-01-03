@@ -16,7 +16,7 @@ struct Friend {
 
 class UserTableViewController: UITableViewController {
     
-    let friends = FriendsInfo().list
+    var friends = FriendsInfo().list
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +55,17 @@ class UserTableViewController: UITableViewController {
         cell.nameLabel.font = .boldSystemFont(ofSize: 14.0)
         cell.messageLabel.font = UIFont.systemFont(ofSize: 14.0)
         cell.likeButton.setImage(UIImage(systemName: friend.like ? "heart.fill" : "heart"), for: .normal)
+        cell.likeButton.tag = indexPath.row // button tag 값 부여
+        // button action 부여 IBAction 대신
+        // selector(함수 이름) 만으로 호출되는 이유 - Fuction Types: 클로저, 일급객체
+        cell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         return cell
+    }
+    
+    @objc func likeButtonTapped(_ sender: UIButton) {
+        friends[sender.tag].like.toggle()
+        tableView.reloadData()
     }
     
 }

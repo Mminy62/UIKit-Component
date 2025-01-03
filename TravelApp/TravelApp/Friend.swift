@@ -12,7 +12,7 @@ struct Friends {
     let message: String?
     let profile_image: String?
     let phone: Int?
-    var like: Bool
+    let like: Bool
 }
 
 struct FriendsInfo {
