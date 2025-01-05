@@ -13,4 +13,17 @@ class TravelTableViewCell: UITableViewCell {
     @IBOutlet weak var saveLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
+    
+    func configureUI() {
+        likeButton.tintColor = .white
+        titleLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+        titleLabel.textColor = .black
+        
+        subtitleLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+        subtitleLabel.textColor = .gray
+        subtitleLabel.numberOfLines = 2
+        
+        saveLabel.textColor = .systemGray2
+        saveLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+    }
 }

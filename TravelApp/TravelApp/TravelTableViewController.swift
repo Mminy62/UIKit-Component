@@ -10,7 +10,7 @@ import Kingfisher
 
 class TravelTableViewController: UITableViewController {
     
-    var travelList = TravelInfo().travel
+    private var travelList = TravelInfo().travel
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,56 +28,28 @@ class TravelTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let travelItem = travelList[indexPath.row]
-        
         let cell = returnCellView(index: indexPath.row)
-        
         
         // image가 nil이면 다른 셀로 분류
         if type(of: cell) == AdTableViewCell.self {
             let cell =  tableView.dequeueReusableCell(withIdentifier: "adCell") as! AdTableViewCell
-            
+            cell.configureUI()
             cell.titleLabel.text = travelItem.title
-            cell.titleLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .bold)
-            cell.titleLabel.numberOfLines = 2
-            cell.titleLabel.textAlignment = .center
-            
-            cell.adLabel.text = " AD "
-            cell.adLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
-            
-            cell.adBackgroundView.backgroundColor = .white
-            cell.adBackgroundView.layer.cornerRadius = 5
-            
-            
-            cell.backView.backgroundColor = UIColor.systemPink
-            cell.backView.layer.cornerRadius = 10
-            
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "travelCell") as! TravelTableViewCell
-            
+            cell.configureUI()
             setImageView(index: indexPath.row, imageView: cell.posterImageView)
-            
             cell.likeButton.tag = indexPath.row
             cell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
             cell.likeButton.setImage(UIImage(systemName: travelItem.like! ? "heart.fill" : "heart"), for: .normal)
-            cell.likeButton.tintColor = .white
-            
             cell.titleLabel.text = travelItem.title
-            cell.titleLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
-            cell.titleLabel.textColor = .black
-            
             cell.subtitleLabel.text = travelItem.description
-            cell.subtitleLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
-            cell.subtitleLabel.textColor = .gray
-            cell.subtitleLabel.numberOfLines = 2
             
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .decimal
-            
             cell.saveLabel.text = "저장 \(numberFormatter.string(for: travelItem.save)!)"
-            cell.saveLabel.textColor = .systemGray2
-            cell.saveLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
             
             return cell
         }
@@ -97,7 +69,7 @@ class TravelTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func setImageView(index: Int, imageView: UIImageView) {
+    private func setImageView(index: Int, imageView: UIImageView) {
         if let url = travelList[index].travel_image {
             imageView.kf.setImage(with: URL(string: url))
             imageView.layer.cornerRadius = 10
@@ -105,7 +77,7 @@ class TravelTableViewController: UITableViewController {
         }
     }
     
-    func returnCellView(index: Int) -> UITableViewCell {
+    private func returnCellView(index: Int) -> UITableViewCell {
         var cell: UITableViewCell
         
         if travelList[index].travel_image == nil {
@@ -113,9 +85,6 @@ class TravelTableViewController: UITableViewController {
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "travelCell") as! TravelTableViewCell
         }
-        
         return cell
     }
-    
-    
 }
