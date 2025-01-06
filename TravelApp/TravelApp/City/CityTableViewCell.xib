@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="CityTableViewCell" selectionStyle="default" indentationWidth="10" rowHeight="161" id="KGk-i7-Jjw" customClass="CityTableViewCell" customModule="TravelApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="349" height="161"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="349" height="161"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTl-Ec-FX7">
+                        <rect key="frame" x="16" y="8" width="317" height="145"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0tJ-Zc-ujs">
+                                <rect key="frame" x="0.0" y="0.0" width="317" height="145"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="145" id="eoZ-BU-A8i"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqh-nT-hSu">
+                                <rect key="frame" x="0.0" y="0.0" width="317" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dne-r3-kzD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7P-3Q-d3g">
+                                <rect key="frame" x="0.0" y="123" width="317" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="4qX-a6-ZFq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="b7P-3Q-d3g" firstAttribute="leading" secondItem="0tJ-Zc-ujs" secondAttribute="leading" id="4Zh-PG-C1m"/>
+                            <constraint firstItem="fqh-nT-hSu" firstAttribute="trailing" secondItem="0tJ-Zc-ujs" secondAttribute="trailing" id="54z-nx-Iqa"/>
+                            <constraint firstItem="0tJ-Zc-ujs" firstAttribute="top" secondItem="vTl-Ec-FX7" secondAttribute="top" id="6po-oY-YEA"/>
+                            <constraint firstItem="b7P-3Q-d3g" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fqh-nT-hSu" secondAttribute="bottom" constant="48" id="73I-Qs-EEr"/>
+                            <constraint firstItem="0tJ-Zc-ujs" firstAttribute="leading" secondItem="vTl-Ec-FX7" secondAttribute="leading" id="9QL-YG-ghS"/>
+                            <constraint firstAttribute="trailing" secondItem="b7P-3Q-d3g" secondAttribute="trailing" id="MLx-PW-P65"/>
+                            <constraint firstItem="fqh-nT-hSu" firstAttribute="top" secondItem="0tJ-Zc-ujs" secondAttribute="top" id="MWX-sL-uiV"/>
+                            <constraint firstItem="fqh-nT-hSu" firstAttribute="leading" secondItem="vTl-Ec-FX7" secondAttribute="leading" id="UGl-gY-c0h"/>
+                            <constraint firstItem="b7P-3Q-d3g" firstAttribute="bottom" secondItem="0tJ-Zc-ujs" secondAttribute="bottom" id="YBQ-ja-Bce"/>
+                            <constraint firstAttribute="bottom" secondItem="0tJ-Zc-ujs" secondAttribute="bottom" id="iQD-oA-4WS"/>
+                            <constraint firstAttribute="trailing" secondItem="0tJ-Zc-ujs" secondAttribute="trailing" id="qO2-tH-kIK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vTl-Ec-FX7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="PB7-xC-CBR"/>
+                    <constraint firstAttribute="trailing" secondItem="vTl-Ec-FX7" secondAttribute="trailing" constant="16" id="VeF-9g-XGs"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vTl-Ec-FX7" secondAttribute="bottom" constant="8" id="X0l-AJ-2sP"/>
+                    <constraint firstItem="vTl-Ec-FX7" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="dd0-3m-dFe"/>
+                    <constraint firstItem="vTl-Ec-FX7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="erz-kb-BXd"/>
+                    <constraint firstItem="vTl-Ec-FX7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jFc-6U-J3J"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="backView" destination="vTl-Ec-FX7" id="jTA-2I-STa"/>
+                <outlet property="countryImageView" destination="0tJ-Zc-ujs" id="5m6-7n-oJN"/>
+                <outlet property="countryLabel" destination="fqh-nT-hSu" id="aaK-tQ-j2c"/>
+                <outlet property="descriptionLabel" destination="b7P-3Q-d3g" id="a4m-dk-DhT"/>
+            </connections>
+            <point key="canvasLocation" x="151.90839694656489" y="28.52112676056338"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
