@@ -28,15 +28,14 @@ class TravelTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let travelItem = travelList[indexPath.row]
-        let cell = returnCellView(index: indexPath.row)
+        let cell = returnCellView(index: indexPath.row) // travel_image가 nil이면 AdCell로 파악
         
-        // image가 nil이면 다른 셀로 분류
+        // cell의 데이터타입에 따라 선정
         if type(of: cell) == AdTableViewCell.self {
             let cell =  tableView.dequeueReusableCell(withIdentifier: "adCell") as! AdTableViewCell
             cell.configureUI()
             cell.titleLabel.text = travelItem.title
             return cell
-            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "travelCell") as! TravelTableViewCell
             cell.configureUI()
@@ -53,15 +52,10 @@ class TravelTableViewController: UITableViewController {
             
             return cell
         }
-
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var cell: UITableViewCell
-        
-        cell = returnCellView(index: indexPath.row)
-        
-        return cell.frame.height
+        return UITableView.automaticDimension
     }
     
     @objc func likeButtonTapped(_ sender: UIButton) {
@@ -80,7 +74,7 @@ class TravelTableViewController: UITableViewController {
     private func returnCellView(index: Int) -> UITableViewCell {
         var cell: UITableViewCell
         
-        if travelList[index].travel_image == nil {
+        if travelList[index].ad == true {
             cell = tableView.dequeueReusableCell(withIdentifier: "adCell") as! AdTableViewCell
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "travelCell") as! TravelTableViewCell

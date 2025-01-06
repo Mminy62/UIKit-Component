@@ -26,4 +26,5 @@ class TravelTableViewCell: UITableViewCell {
         saveLabel.textColor = .systemGray2
         saveLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .semibold)
     }
+
 }
