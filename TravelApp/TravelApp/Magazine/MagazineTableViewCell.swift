@@ -13,7 +13,26 @@ class MagazineTableViewCell: UITableViewCell {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    func configureUI() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        configureUI()
+    }
+    
+    func configureData(row: Magazine) {
+        posterImageView.kf.setImage(with: URL(string: row.photo_image))
+        titleLabel.text = row.title
+        subtitleLabel.text = row.subtitle
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyMMdd"
+        let dateData = dateFormatter.date(from: row.date)
+        dateFormatter.dateFormat = "yy년 MM월 dd일"
+        let newDateString = dateFormatter.string(from: dateData!)
+        dateLabel.text = newDateString
+    }
+    
+    private func configureUI() {
         posterImageView.layer.cornerRadius = 10
         posterImageView.contentMode = .scaleAspectFill
         
@@ -27,5 +46,6 @@ class MagazineTableViewCell: UITableViewCell {
         
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .gray
+        dateLabel.textAlignment = .right
     }
 }

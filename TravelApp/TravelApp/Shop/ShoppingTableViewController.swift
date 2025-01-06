@@ -70,35 +70,25 @@ class ShoppingTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell") as! ShopTableViewCell
-        
-        cell.configureUI()
-        cell.titleLabel.text = shopList[indexPath.row].title
+        let shopItem = shopList[indexPath.row]
+        cell.configureData(row: shopItem)
         
         // 버튼 태그 입력
         cell.checkButton.tag = indexPath.row
         cell.likeButton.tag = indexPath.row
-        
-        let checkButtonImage = UIImage(systemName: shopList[indexPath.row].purchase ? "checkmark.square.fill" : "checkmark.square")
-        let likeButtonImage = UIImage(systemName: shopList[indexPath.row].like ? "star.fill" : "star")
-        
-        cell.checkButton.setImage(checkButtonImage, for: .normal)
-        cell.likeButton.setImage(likeButtonImage, for: .normal)
-        
         cell.checkButton.accessibilityIdentifier = "checkButton"
         cell.likeButton.accessibilityIdentifier = "likeButton"
         
         cell.checkButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         cell.likeButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
             shopList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)

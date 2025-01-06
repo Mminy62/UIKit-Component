@@ -29,26 +29,11 @@ class MagazineTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "magazineCell") as! MagazineTableViewCell
         let magazineItem = magazineList[indexPath.row]
-        
-        cell.configureUI()
-        cell.posterImageView.kf.setImage(with: URL(string: magazineItem.photo_image))
-        cell.titleLabel.text = magazineItem.title
-        cell.subtitleLabel.text = magazineItem.subtitle
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "yyMMdd"
-        let dateData = dateFormatter.date(from: magazineItem.date)
-        dateFormatter.dateFormat = "yy년 MM월 dd일"
-        let newDateString = dateFormatter.string(from: dateData!)
-        cell.dateLabel.text = newDateString
-       
+        cell.configureData(row: magazineItem)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "magazineCell") as! MagazineTableViewCell
-        
-        return cell.frame.height
+        return UITableView.automaticDimension
     }
 }

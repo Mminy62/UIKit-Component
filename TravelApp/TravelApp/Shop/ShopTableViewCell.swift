@@ -14,9 +14,20 @@ class ShopTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backView: UIView!
     
-    let shopList = ShopInfo().shopList
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        configureUI()
+    }
     
-    func configureUI() {
+    func configureData(row: Shop) {
+        titleLabel.text = row.title
+        let checkButtonImage = UIImage(systemName: row.purchase ? "checkmark.square.fill" : "checkmark.square")
+        let likeButtonImage = UIImage(systemName: row.like ? "star.fill" : "star")
+        checkButton.setImage(checkButtonImage, for: .normal)
+        likeButton.setImage(likeButtonImage, for: .normal)
+    }
+    
+    private func configureUI() {
         backView.backgroundColor = UIColor.systemGray6
         backView.layer.cornerRadius = 10
         titleLabel?.font = UIFont.systemFont(ofSize: 14.0)

@@ -28,7 +28,7 @@ class TravelTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let travelItem = travelList[indexPath.row]
-        let cell = returnCellView(index: indexPath.row) // travel_image가 nil이면 AdCell로 파악
+        let cell = returnCellView(index: indexPath.row)
         
         // cell의 데이터타입에 따라 선정
         if type(of: cell) == AdTableViewCell.self {
@@ -38,18 +38,9 @@ class TravelTableViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "travelCell") as! TravelTableViewCell
-            cell.configureUI()
-            setImageView(index: indexPath.row, imageView: cell.posterImageView)
+            cell.configureData(row: travelItem)
             cell.likeButton.tag = indexPath.row
             cell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-            cell.likeButton.setImage(UIImage(systemName: travelItem.like! ? "heart.fill" : "heart"), for: .normal)
-            cell.titleLabel.text = travelItem.title
-            cell.subtitleLabel.text = travelItem.description
-            
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            cell.saveLabel.text = "저장 \(numberFormatter.string(for: travelItem.save)!)"
-            
             return cell
         }
     }
@@ -61,14 +52,6 @@ class TravelTableViewController: UITableViewController {
     @objc func likeButtonTapped(_ sender: UIButton) {
         travelList[sender.tag].like?.toggle()
         tableView.reloadData()
-    }
-    
-    private func setImageView(index: Int, imageView: UIImageView) {
-        if let url = travelList[index].travel_image {
-            imageView.kf.setImage(with: URL(string: url))
-            imageView.layer.cornerRadius = 10
-            imageView.contentMode = .scaleAspectFill
-        }
     }
     
     private func returnCellView(index: Int) -> UITableViewCell {
