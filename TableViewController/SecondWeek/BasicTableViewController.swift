@@ -9,7 +9,7 @@ import UIKit
 
 class BasicTableViewController: UITableViewController {
     
-    var list = ["프로젝트", "메인업무", "오류", "새싹", "오징어"] {
+    var list = ["프로젝트", "메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무", "오류", "새싹", "오징어", "프로젝트", "메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무메인업무", "오류", "새싹", "오징어", "프로젝트", "메인업무", "오류", "새싹", "오징어", "프로젝트", "메인업무", "오류", "새싹", "오징어", "프로젝트", "메인업무", "오류", "새싹", "오징어"] {
         didSet {
             tableView.reloadData()
         }
@@ -25,6 +25,7 @@ class BasicTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     // 1. 셀의 개수: numberOfRowsInSection
@@ -40,6 +41,7 @@ class BasicTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "minCell")
         cell?.detailTextLabel?.setPrimaryLabel("Detail??")
         cell?.textLabel?.text = list[indexPath.row]
+        cell?.textLabel?.numberOfLines = 0
         cell?.textLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .bold)
         cell?.backgroundColor = indexPath.row % 2 == 1 ? UIColor.red : UIColor.green
 
@@ -49,10 +51,10 @@ class BasicTableViewController: UITableViewController {
     }
 
     // 3. 셀 높이
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // cell 마다 높이가 다를 수 있기 때문에, cellForRowAt 함수처럼 셀을 생성할때마다 호출된다.
-        return 80.5
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        // cell 마다 높이가 다를 수 있기 때문에, cellForRowAt 함수처럼 셀을 생성할때마다 호출된다.
+//        return 80.5
+//    }
     
     // 셀을 클릭했을 때
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
