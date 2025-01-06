@@ -37,6 +37,7 @@ class ShoppingTableViewController: UITableViewController {
         headerView.backgroundColor = .white
         headerBackgroundView.backgroundColor = .systemGray6
         headerBackgroundView.layer.cornerRadius = 10
+
     }
     
     private func getItemName() -> String? {

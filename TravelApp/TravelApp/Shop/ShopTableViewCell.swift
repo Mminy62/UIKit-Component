@@ -31,6 +31,7 @@ class ShopTableViewCell: UITableViewCell {
         backView.backgroundColor = UIColor.systemGray6
         backView.layer.cornerRadius = 10
         titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
+        titleLabel.numberOfLines = 0
         checkButton.tintColor = .black
         likeButton.tintColor = .black
     }
