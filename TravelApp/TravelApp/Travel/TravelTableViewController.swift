@@ -15,6 +15,9 @@ class TravelTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "도시 상세 정보"
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black  // 색상 변경
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     // MARK: - Table view data source
@@ -28,7 +31,7 @@ class TravelTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let travelItem = travelList[indexPath.row]
-        let cell = returnCellView(index: indexPath.row)
+        let cell = returnCellInfo(index: indexPath.row)
         
         // cell의 데이터타입에 따라 선정
         if type(of: cell) == AdTableViewCell.self {
@@ -45,6 +48,24 @@ class TravelTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = returnCellInfo(index: indexPath.row)
+        if type(of: cell) == AdTableViewCell.self {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "AdDetailViewController") as! AdDetailViewController
+            vc.content = travelList[indexPath.row]
+//            vc.modalPresentationStyle = .fullScreen
+            
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+            
+        } else {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "TravelDetailViewController") as! TravelDetailViewController
+            vc.content = travelList[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -54,7 +75,7 @@ class TravelTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    private func returnCellView(index: Int) -> UITableViewCell {
+    private func returnCellInfo(index: Int) -> UITableViewCell {
         var cell: UITableViewCell
         
         if travelList[index].ad == true {
