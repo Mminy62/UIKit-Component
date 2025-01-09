@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct Restaurant {
     let image: String
     let latitude: Double

@@ -8,10 +8,11 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
-
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+class ViewController: UIViewController, UIActionSheetDelegate {
+    
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var showButton: UIButton!
+    
     let center = CLLocationCoordinate2D(latitude: 37.65370, longitude: 127.04740)
     let restaurantArray = RestaurantList().restaurantArray
     var annotations: [MKAnnotation] = []
@@ -22,18 +23,64 @@ class ViewController: UIViewController {
     }
     
     func configureUI() {
-
-        segmentedControl.removeAllSegments()
-        segmentedControl.insertSegment(withTitle: "전체", at: 0, animated: true)
-        segmentedControl.insertSegment(withTitle: "한식", at: 1, animated: true)
-        segmentedControl.insertSegment(withTitle: "양식", at: 2, animated: true)
-        segmentedControl.selectedSegmentIndex = 0
         configureMapView()
+        configureButton()
+        configureActionSheet()
+    }
+    
+    func updateAnnotations(_ menuName: String) {
+        // 1. 핀들 제거
+        mapView.removeAnnotations(annotations)
+        
+        // 2. 아이템 추가
+        var placeList = restaurantArray
+        switch menuName {
+        case Menu.all.name: // 전체
+            placeList = restaurantArray
+        case Menu.korean.name: // 한식
+            placeList = restaurantArray.filter { $0.category == Menu.korean.name }
+        case Menu.western.name: // 양식
+            placeList = restaurantArray.filter { $0.category == Menu.western.name }
+        default:
+            return
+        }
+        
+        // 3. mapView에 핀 추가
+        annotations = placeList.map { configureAnnotation(item: $0) }
+        mapView.addAnnotations(annotations)
+    }
+}
+
+// MARK: Menu enum
+enum Menu: Int {
+    case all
+    case korean
+    case western
+    
+    var name: String {
+        switch self {
+        case .all:
+            "전체"
+        case .korean:
+            "한식"
+        case .western:
+            "양식"
+        }
+    }
+}
+
+// MARK: UI configure 설정
+extension ViewController {
+    private func configureButton() {
+        showButton.setTitle("Show Category", for: .normal)
+        showButton.titleLabel?.textColor = .black
+        showButton.backgroundColor = .white
+        showButton.addTarget(self, action: #selector(configureActionSheet), for: .touchUpInside)
     }
     
     private func configureMapView() {
         mapView.region = MKCoordinateRegion(center: center, latitudinalMeters: 800, longitudinalMeters: 800)
-        segementedControlTapped(segmentedControl)
+        self.updateAnnotations(Menu.all.name)
     }
     
     private func configureAnnotation(item: Restaurant) -> MKAnnotation {
@@ -44,29 +91,23 @@ class ViewController: UIViewController {
         return annotation
     }
     
-    @IBAction func segementedControlTapped(_ sender: UISegmentedControl) {
-        // 1. 핀들 제거
-        mapView.removeAnnotations(annotations)
-        
-        // 2. 아이템 추가
-        var placeList = restaurantArray
-        switch sender.selectedSegmentIndex {
-        case 0: // 전체
-            // 위치 빼기
-            placeList = restaurantArray
-        case 1: // 한식
-            placeList = restaurantArray.filter { $0.category == "한식" }
-        case 2: // 양식
-            placeList = restaurantArray.filter { $0.category == "양식" }
-        default:
-            return
+    @objc func configureActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil,
+                                            preferredStyle: .actionSheet)
+        let firstAction = UIAlertAction(title: Menu.all.name, style: .default) { (action) in
+            self.updateAnnotations(action.title!)
         }
-        
-        // 3. mapView에 핀 추가
-        annotations = placeList.map { configureAnnotation(item: $0) }
-        mapView.addAnnotations(annotations)
-    }
-    
-    
-}
+        let secondAction = UIAlertAction(title: Menu.korean.name, style: .default) { (action) in
+            self.updateAnnotations(action.title!)
+        }
+        let thirdAction = UIAlertAction(title: Menu.western.name, style: .default) { (action) in
+            self.updateAnnotations(action.title!)
+        }
 
+        actionSheet.addAction(firstAction)
+        actionSheet.addAction(secondAction)
+        actionSheet.addAction(thirdAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+}
