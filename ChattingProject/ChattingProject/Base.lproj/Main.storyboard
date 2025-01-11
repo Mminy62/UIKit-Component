@@ -69,10 +69,63 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gnH-Om-xrR"/>
+                    <connections>
+                        <outlet property="chatListCollectionView" destination="jst-B8-Blm" id="Sy6-Kd-BzQ"/>
+                        <outlet property="searchBarView" destination="1aD-QH-1SH" id="i5k-HB-vf3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1057.2519083969464" y="-34.507042253521128"/>
+        </scene>
+        <!--Chat Detail View Controller-->
+        <scene sceneID="cdl-qi-GOg">
+            <objects>
+                <viewController storyboardIdentifier="ChatDetailViewController" id="ibU-lf-4St" customClass="ChatDetailViewController" customModule="ChattingProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6uA-XX-3Ra">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NPv-tK-rxn">
+                                <rect key="frame" x="0.0" y="69" width="393" height="664"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pby-8G-EDE">
+                                <rect key="frame" x="20" y="733" width="353" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Sdm-Eh-qrx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edo-Pa-F5o">
+                                <rect key="frame" x="330" y="750" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="arrowshape.right" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rMq-X0-AmN"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NPv-tK-rxn" firstAttribute="leading" secondItem="rMq-X0-AmN" secondAttribute="leading" id="EKe-vm-TaM"/>
+                            <constraint firstItem="NPv-tK-rxn" firstAttribute="top" secondItem="rMq-X0-AmN" secondAttribute="top" constant="10" id="N79-Wj-Wap"/>
+                            <constraint firstItem="rMq-X0-AmN" firstAttribute="trailing" secondItem="NPv-tK-rxn" secondAttribute="trailing" id="SiK-0b-DjK"/>
+                            <constraint firstItem="pby-8G-EDE" firstAttribute="top" secondItem="NPv-tK-rxn" secondAttribute="bottom" id="e5h-3Y-NM6"/>
+                            <constraint firstItem="rMq-X0-AmN" firstAttribute="trailing" secondItem="pby-8G-EDE" secondAttribute="trailing" constant="20" id="mUD-EK-sf2"/>
+                            <constraint firstItem="pby-8G-EDE" firstAttribute="leading" secondItem="rMq-X0-AmN" secondAttribute="leading" constant="20" id="utx-BN-4VJ"/>
+                            <constraint firstItem="rMq-X0-AmN" firstAttribute="bottom" secondItem="pby-8G-EDE" secondAttribute="bottom" constant="30" id="zJj-LH-elL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageTextField" destination="pby-8G-EDE" id="Gr0-FO-r0k"/>
+                        <outlet property="sendButton" destination="edo-Pa-F5o" id="3lq-Dm-dWk"/>
+                        <outlet property="tableView" destination="NPv-tK-rxn" id="OzR-Xu-eG7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gE2-G7-MUT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2023.6641221374045" y="-42.253521126760567"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="usZ-bJ-L44">
@@ -94,6 +147,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.right" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
