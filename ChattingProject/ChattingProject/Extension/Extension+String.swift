@@ -13,11 +13,12 @@ extension String {
         return formatter
     }()
     
-    func convertToDateString() -> String{
+    func convertToDateString(formatString: String) -> String{
         let formatter = String.dateFormatter
+        formatter.locale = Locale(identifier:"ko_KR")
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         let dateData = String.dateFormatter.date(from: self)
-        formatter.dateFormat = "yy.MM.dd"
+        formatter.dateFormat = formatString
         let date = dateData ?? Date()
         let convertString = formatter.string(from: date)
         return convertString

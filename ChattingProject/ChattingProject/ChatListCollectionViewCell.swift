@@ -24,7 +24,7 @@ class ChatListCollectionViewCell: UICollectionViewCell {
         profileImageView.image = UIImage(named: item.chatroomImage[0])
         nameLabel.text = item.chatroomName
         messageLabel.text = item.chatList.last?.message
-        dateLabel.text = item.chatList.last?.date.convertToDateString()
+        dateLabel.text = item.chatList.last?.date.convertToDateString(formatString: "yy.MM.dd")
     }
     
     private func configureUI() {

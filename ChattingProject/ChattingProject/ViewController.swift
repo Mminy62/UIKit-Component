@@ -27,6 +27,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func configureUI() {
+        // Back button
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
         navigationItem.title = "TRAVEL TALK"
         searchBarView.placeholder = "친구 이름을 검색해보세요"
         let collectionWidth = chatListCollectionView.frame.width
@@ -43,7 +48,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         if content.trimmingCharacters(in: .whitespaces).count == 0 {
             filteredList = mockChatList
         } else {
-            content = content.lowercased() // 소문자 처리
+            content = content.lowercased() // 검색 소문자 처리
             filteredList = mockChatList.filter { $0.chatroomName.lowercased().contains(content) }
         }
         chatListCollectionView.reloadData()
@@ -65,7 +70,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = chatListCollectionView.dequeueReusableCell(withReuseIdentifier: ChatListCollectionViewCell.identifier, for: indexPath) as! ChatListCollectionViewCell
         
         cell.configureData(item: filteredList[indexPath.item])
-
+        
         return cell
     }
     

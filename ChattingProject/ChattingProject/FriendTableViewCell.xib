@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendTableViewCell" rowHeight="143" id="KGk-i7-Jjw" customClass="FriendTableViewCell" customModule="ChattingProject" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="516" height="143"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendTableViewCell" rowHeight="212" id="KGk-i7-Jjw" customClass="FriendTableViewCell" customModule="ChattingProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="418" height="212"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="516" height="143"/>
+                <rect key="frame" x="0.0" y="0.0" width="418" height="212"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THg-eJ-Y0t">
@@ -32,14 +32,11 @@
                             <constraint firstAttribute="width" constant="50" id="i0L-vI-ItL"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km1-9N-EV4">
-                        <rect key="frame" x="70" y="51" width="41.333333333333343" height="82"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_bubble_you_dark" translatesAutoresizingMaskIntoConstraints="NO" id="a6J-wZ-Px8">
+                        <rect key="frame" x="59.999999999999986" y="31" width="151.66666666666663" height="176"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 오전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eI6-qK-G33">
-                        <rect key="frame" x="121.33333333333331" y="112" width="85" height="21"/>
+                        <rect key="frame" x="216.66666666666663" y="161" width="85" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="85" id="dHb-mg-jay"/>
                         </constraints>
@@ -47,22 +44,42 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dfasdcvvxxcvcv" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km1-9N-EV4">
+                        <rect key="frame" x="75" y="46" width="121.66666666666669" height="131"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="km1-9N-EV4" firstAttribute="top" secondItem="THg-eJ-Y0t" secondAttribute="bottom" constant="20" id="Cva-A9-JDc"/>
+                    <constraint firstItem="km1-9N-EV4" firstAttribute="leading" secondItem="a6J-wZ-Px8" secondAttribute="leading" constant="15" id="8cI-MV-gx7"/>
                     <constraint firstItem="THg-eJ-Y0t" firstAttribute="leading" secondItem="Ekk-OI-Ur1" secondAttribute="trailing" constant="10" id="GJU-tp-3EO"/>
-                    <constraint firstItem="eI6-qK-G33" firstAttribute="leading" secondItem="km1-9N-EV4" secondAttribute="trailing" constant="10" id="GKK-oR-PwL"/>
                     <constraint firstItem="Ekk-OI-Ur1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PQs-iw-eEZ"/>
+                    <constraint firstItem="a6J-wZ-Px8" firstAttribute="trailing" secondItem="km1-9N-EV4" secondAttribute="trailing" constant="15" id="Qa6-sM-tSO"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eI6-qK-G33" secondAttribute="trailing" constant="20" id="V2I-QP-vbc"/>
-                    <constraint firstAttribute="bottom" secondItem="eI6-qK-G33" secondAttribute="bottom" constant="10" id="dc9-6x-tSQ"/>
+                    <constraint firstAttribute="bottom" secondItem="eI6-qK-G33" secondAttribute="bottom" constant="30" id="dc9-6x-tSQ"/>
+                    <constraint firstItem="km1-9N-EV4" firstAttribute="top" secondItem="THg-eJ-Y0t" secondAttribute="bottom" constant="15" id="eT7-jE-DWu"/>
                     <constraint firstItem="Ekk-OI-Ur1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="fJH-wr-ZUb"/>
-                    <constraint firstItem="km1-9N-EV4" firstAttribute="leading" secondItem="Ekk-OI-Ur1" secondAttribute="trailing" constant="10" id="gGd-5W-XzF"/>
-                    <constraint firstAttribute="bottom" secondItem="km1-9N-EV4" secondAttribute="bottom" constant="10" id="irX-Mw-0r1"/>
+                    <constraint firstAttribute="bottom" secondItem="km1-9N-EV4" secondAttribute="bottom" constant="35" id="h6v-Nw-O6T"/>
+                    <constraint firstItem="km1-9N-EV4" firstAttribute="leading" secondItem="Ekk-OI-Ur1" secondAttribute="trailing" constant="15" id="mjC-oZ-CNc"/>
                     <constraint firstItem="THg-eJ-Y0t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="qij-6t-NS7"/>
+                    <constraint firstItem="km1-9N-EV4" firstAttribute="top" secondItem="a6J-wZ-Px8" secondAttribute="top" constant="15" id="w8a-QT-rc3"/>
+                    <constraint firstItem="km1-9N-EV4" firstAttribute="bottom" secondItem="a6J-wZ-Px8" secondAttribute="bottom" constant="-30" id="wWz-xy-cQ9"/>
+                    <constraint firstItem="eI6-qK-G33" firstAttribute="leading" secondItem="km1-9N-EV4" secondAttribute="trailing" constant="20" id="wrD-yY-y9o"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="280.91603053435114" y="34.154929577464792"/>
+            <connections>
+                <outlet property="chatBackgroundView" destination="a6J-wZ-Px8" id="wN4-7S-89B"/>
+                <outlet property="messageLabel" destination="km1-9N-EV4" id="tTt-sD-LU0"/>
+                <outlet property="nameLabel" destination="THg-eJ-Y0t" id="l9m-eA-qJZ"/>
+                <outlet property="profileImageView" destination="Ekk-OI-Ur1" id="M8x-Nv-fMM"/>
+                <outlet property="timeLabel" destination="eI6-qK-G33" id="ZHc-40-8RI"/>
+            </connections>
+            <point key="canvasLocation" x="290.07633587786256" y="69.718309859154928"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="chat_bubble_you_dark" width="42" height="44.333332061767578"/>
+    </resources>
 </document>

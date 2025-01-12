@@ -32,6 +32,8 @@ class ChatDetailViewController: UIViewController {
     
     func configureUI() {
         navigationItem.title = chatInfo?.chatroomName
+        tableView.separatorStyle = .none
+        
         sendButton.setImage(UIImage(named: "arrowshape.turn.up.right"), for: .normal)
         messageTextField.backgroundColor = .systemGray6
         messageTextField.textColor = .black
@@ -42,14 +44,32 @@ class ChatDetailViewController: UIViewController {
 
 extension ChatDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        if let chatInfo {
+            return chatInfo.chatList.count
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell") as! FriendTableViewCell
-    
         
-        return cell
+        let item = chatInfo!.chatList[indexPath.row]
+    
+        switch item.user {
+        case .user:
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier) as! UserTableViewCell
+            cell.configureUI(data: item)
+            
+            return cell
+
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: FriendTableViewCell.identifier) as! FriendTableViewCell
+            cell.configureUI(data: item)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
     
     
