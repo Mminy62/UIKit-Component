@@ -97,6 +97,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="keyboardReturnKeyTapped:" destination="ibU-lf-4St" eventType="editingDidEndOnExit" id="XQU-Rj-W9K"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edo-Pa-F5o">
                                 <rect key="frame" x="330" y="750" width="22" height="22"/>
@@ -121,11 +124,12 @@
                         <outlet property="messageTextField" destination="pby-8G-EDE" id="Gr0-FO-r0k"/>
                         <outlet property="sendButton" destination="edo-Pa-F5o" id="3lq-Dm-dWk"/>
                         <outlet property="tableView" destination="NPv-tK-rxn" id="OzR-Xu-eG7"/>
+                        <outlet property="textFieldConstraint" destination="zJj-LH-elL" id="Kia-bp-sse"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gE2-G7-MUT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023.6641221374045" y="-42.253521126760567"/>
+            <point key="canvasLocation" x="1970" y="-35"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="usZ-bJ-L44">
