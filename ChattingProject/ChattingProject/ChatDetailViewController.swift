@@ -118,13 +118,4 @@ extension ChatDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
-    
-    func scrollToBottom(){
-        DispatchQueue.main.async {
-            let indexPath = IndexPath(row: self.chatInfo!.chatList.count - 1, section: 1)
-            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-            
-        }
-    }
-    
 }
