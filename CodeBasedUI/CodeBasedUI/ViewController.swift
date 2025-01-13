@@ -83,7 +83,7 @@ class ViewController: UIViewController {
     var title: String {
         switch self {
         case .jack:
-            "JackFlix"
+            "JACKFLIX"
         case .npay:
             "NPay"
         case .rank:
