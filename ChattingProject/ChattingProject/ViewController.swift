@@ -20,14 +20,14 @@ class ViewController: UIViewController, UISearchBarDelegate {
         chatListCollectionView.dataSource = self
         searchBarView.delegate = self
         
-        let nib = UINib(nibName: ChatListCollectionViewCell.identifier, bundle: nil)
-        chatListCollectionView.register(nib, forCellWithReuseIdentifier: ChatListCollectionViewCell.identifier)
-        
+//        let chatListNib = UINib(nibName: ChatListCollectionViewCell.identifier, bundle: nil)
+//        chatListCollectionView.register(chatListNib, forCellWithReuseIdentifier: ChatListCollectionViewCell.identifier)
+        let multipleNib = UINib(nibName: ChatListCollectionViewCell.identifier, bundle: nil)
+        chatListCollectionView.register(multipleNib, forCellWithReuseIdentifier: ChatListCollectionViewCell.identifier)
         configureUI()
     }
     
     func configureUI() {
-        // Back button
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
@@ -42,6 +42,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         chatListCollectionView.collectionViewLayout = layout
     }
     
+    // MARK: SearchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard var content = searchBar.text else { return }
         
@@ -67,11 +68,18 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = chatListCollectionView.dequeueReusableCell(withReuseIdentifier: ChatListCollectionViewCell.identifier, for: indexPath) as! ChatListCollectionViewCell
+        let data = filteredList[indexPath.item]
         
-        cell.configureData(item: filteredList[indexPath.item])
+            let cell = chatListCollectionView.dequeueReusableCell(withReuseIdentifier: ChatListCollectionViewCell.identifier, for: indexPath) as! ChatListCollectionViewCell
+            
+            cell.configureData(item: filteredList[indexPath.item])
+            return cell
         
-        return cell
+//            let cell = chatListCollectionView.dequeueReusableCell(withReuseIdentifier: ChatListCollectionViewCell.identifier, for: indexPath) as! ChatListCollectionViewCell
+//            
+//            cell.configureData(item: filteredList[indexPath.item])
+//            return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -58,7 +58,6 @@ class ChatDetailViewController: UIViewController {
         // 키보드 사이즈
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         let keyboardHeight = keyboardSize.height
-        
         let keyboardDuration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         
         // Keyboard's animation curve
