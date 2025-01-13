@@ -30,7 +30,6 @@ class CityCollectionViewController: UIViewController, UICollectionViewDelegate, 
         layout.itemSize = CGSize(width: 150 , height: 300)
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collectionView.collectionViewLayout = layout
         
         controlView.addTarget(self, action: #selector(tapped), for: UIControl.Event.valueChanged)
