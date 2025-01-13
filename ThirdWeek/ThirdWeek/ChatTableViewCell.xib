@@ -9,15 +9,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="192" id="KGk-i7-Jjw" customClass="ChatTableViewCell" customModule="ThirdWeek" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="352" height="192"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="368" id="KGk-i7-Jjw" customClass="ChatTableViewCell" customModule="ThirdWeek" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="687" height="368"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="352" height="192"/>
+                <rect key="frame" x="0.0" y="0.0" width="687" height="368"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_bubble_you_dark" translatesAutoresizingMaskIntoConstraints="NO" id="LDG-4R-bXB">
-                        <rect key="frame" x="56" y="33" width="141" height="155"/>
+                        <rect key="frame" x="56" y="33" width="140.66666666666666" height="331"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1oa-Jm-RLW" userLabel="profile Image View">
                         <rect key="frame" x="8" y="8" width="44" height="44"/>
@@ -27,7 +27,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vj9-0U-LVf">
-                        <rect key="frame" x="60" y="8" width="242" height="21"/>
+                        <rect key="frame" x="60" y="8" width="577" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="4LG-IQ-UKa"/>
                         </constraints>
@@ -36,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 오전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwp-x7-e5e">
-                        <rect key="frame" x="201" y="164" width="70" height="20"/>
+                        <rect key="frame" x="200.66666666666666" y="340" width="69.999999999999972" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="JSk-Fc-ZFi"/>
                             <constraint firstAttribute="width" constant="70" id="i5x-RV-Bdw"/>
@@ -46,7 +46,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="안ㅇㄹㄴㄴㄹㅁㅇ녕" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Od-z4-YwB">
-                        <rect key="frame" x="60" y="37" width="133" height="147"/>
+                        <rect key="frame" x="60" y="37" width="132.66666666666666" height="323"/>
                         <color key="backgroundColor" red="0.96841150519999997" green="0.87868576939999998" blue="0.69223328539999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -72,7 +72,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="83.969465648854964" y="38.732394366197184"/>
+            <point key="canvasLocation" x="335" y="44"/>
         </tableViewCell>
     </objects>
     <resources>
