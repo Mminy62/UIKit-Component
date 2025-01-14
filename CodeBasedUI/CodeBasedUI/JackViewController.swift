@@ -57,7 +57,7 @@ class JackViewController: UIViewController {
     }
     
     private func configureUI() {
-        titleLabel.text = MenuButton.jack.title
+        titleLabel.text = PageButton.jack.title
         titleLabel.textColor = .red
         titleLabel.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
         stackView.backgroundColor = .clear
