@@ -7,9 +7,12 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class RankViewController: UIViewController {
-    let dataList = mockData
+    private let apiKey = "acfa8d4399a21fe8c04d1fafebc129de"
+    var movieData: Movie?
+    
     let searchTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "날짜를 입력하세요"
@@ -31,7 +34,7 @@ class RankViewController: UIViewController {
     }()
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionLayout())
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -43,28 +46,22 @@ class RankViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-//        collectionView.register(CodeCollectionViewCell.self, forCellWithReuseIdentifier: CodeCollectionViewCell.identifier)
         collectionView.register(RankCollectionViewCell.self, forCellWithReuseIdentifier: RankCollectionViewCell.identifier)
         collectionView.backgroundColor = .clear
         
         createItemLayout()
         
+        // MARK: 첫 빌드 시 어제 날짜 보여주기
+        let yesterday = Date().convertToYesterday().convertToString(format: "yyyyMMdd")
+        getData(date: yesterday)
     }
-    
-//    func createCollectionLayout() -> UICollectionViewFlowLayout {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.itemSize = CGSize(width: 50, height: 50)
-//        layout.scrollDirection = .vertical
-//        return layout
-//    }
-    
     
     func createCollectionLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width - 40, height: 50)
         layout.scrollDirection = .vertical
         return layout
-
+        
     }
     
     func createItemLayout(){
@@ -95,18 +92,40 @@ class RankViewController: UIViewController {
             make.bottom.equalToSuperview() // 추가
         }
     }
-
+    
+    func getData(date: String) {
+        let url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(apiKey)&targetDt=\(date)"
+        AF.request(url, method: .get).responseDecodable(of: Movie.self) { response in
+            switch response.result {
+                
+            case .success(let value):
+                self.movieData = value
+                self.collectionView.reloadData()
+                print(value)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension RankViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        dataList.count
+        movieData?.boxOfficeResult.dailyBoxOfficeList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RankCollectionViewCell.identifier, for: indexPath) as! RankCollectionViewCell
-        cell.configureData(row: dataList[indexPath.item])
+        if let movieList = movieData?.boxOfficeResult.dailyBoxOfficeList {
+            cell.configureData(row: movieList[indexPath.item])
+        } else {
+            print("No data")
+            // 로딩 화면
+        }
         return cell
     }
+    
+    
 }

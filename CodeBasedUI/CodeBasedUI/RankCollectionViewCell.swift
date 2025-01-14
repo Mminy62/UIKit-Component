@@ -28,11 +28,10 @@ class RankCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureData(row: Data) {
-        print(#function)
-        rankLabel.text = "\(row.rank)"
-        titleLabel.text = row.title
-        dateLabel.text = row.date
+    func configureData(row: MovieInfo) {
+        rankLabel.text = row.rank
+        titleLabel.text = row.movieNm
+        dateLabel.text = row.openDt
     }
     
     private func configureUI() {
@@ -65,4 +64,5 @@ class RankCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(safeAreaLayoutGuide)
         }
     }
+
 }
