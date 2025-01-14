@@ -50,19 +50,18 @@ class RankCollectionViewCell: UICollectionViewCell {
     private func configureLayout() {
         rankLabel.snp.makeConstraints { make in
             make.leading.equalTo(safeAreaLayoutGuide)
-            make.height.equalTo(20)
+            make.height.equalTo(25)
             make.width.equalTo(40)
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.centerY.equalTo(safeAreaLayoutGuide)
         }
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(rankLabel.snp.trailing).offset(20)
             make.trailing.equalTo(safeAreaLayoutGuide).offset(-80)
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.centerY.equalTo(safeAreaLayoutGuide)
         }
         dateLabel.snp.makeConstraints { make in
             make.trailing.equalTo(safeAreaLayoutGuide)
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.centerY.equalTo(safeAreaLayoutGuide)
         }
     }
-
 }

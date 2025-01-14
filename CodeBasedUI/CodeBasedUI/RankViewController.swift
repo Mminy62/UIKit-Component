@@ -30,6 +30,7 @@ class RankViewController: UIViewController {
         button.setTitle("검색", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.addTarget(RankViewController.self, action: #selector(searchButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -60,6 +61,7 @@ class RankViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width - 40, height: 50)
         layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
         return layout
         
     }
@@ -76,7 +78,7 @@ class RankViewController: UIViewController {
             make.top.equalTo(searchTextField.snp.bottom)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-100)
-            make.height.equalTo(2)
+            make.height.equalTo(3)
         }
         
         searchButton.snp.makeConstraints { make in
@@ -89,7 +91,7 @@ class RankViewController: UIViewController {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(textFieldBarView.snp.bottom).offset(10)
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview() // 추가
+            make.bottom.equalToSuperview().offset(-20) // 추가
         }
     }
     
@@ -108,6 +110,12 @@ class RankViewController: UIViewController {
             }
         }
     }
+    
+    @objc func searchButtonTapped() {
+        if let date = searchTextField.text, !date.trimmingCharacters(in: .whitespaces).isEmpty {
+            getData(date: date)
+        }
+    }
 }
 
 extension RankViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -122,10 +130,7 @@ extension RankViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.configureData(row: movieList[indexPath.item])
         } else {
             print("No data")
-            // 로딩 화면
         }
         return cell
     }
-    
-    
 }
