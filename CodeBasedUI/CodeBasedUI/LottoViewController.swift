@@ -9,21 +9,6 @@ import UIKit
 import SnapKit
 import Alamofire
 
-protocol ViewConfiguration {
-    func configureHierarchy() // addSubView
-    func configureLayout() // SnapKit
-    func configureView() // property
-}
-
-struct Lotto: Decodable {
-    let totSellamnt: Int
-    let returnValue, drwNoDate: String
-    let firstWinamnt, drwtNo6, drwtNo4, firstPrzwnerCo: Int
-    let drwtNo5, bnusNo, firstAccumamnt, drwNo: Int
-    let drwtNo2, drwtNo3, drwtNo1: Int
-}
-
-
 class LottoViewController: UIViewController, ViewConfiguration {
     let roundTextField = UITextField()
     let infoLabel = UILabel()
