@@ -15,7 +15,7 @@ protocol ViewConfiguration {
     func configureView() // property
 }
 
-struct Lotto {
+struct Lotto: Decodable {
     let totSellamnt: Int
     let returnValue, drwNoDate: String
     let firstWinamnt, drwtNo6, drwtNo4, firstPrzwnerCo: Int
@@ -36,14 +36,17 @@ class LottoViewController: UIViewController, ViewConfiguration {
     let stackView = UIStackView()
     let pickerView = UIPickerView()
     let recentRound = 1154
+    var lottoData: Lotto?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         roundTextField.delegate = self
         pickerView.delegate = self
         pickerView.dataSource = self
         
+        getLottoData(round: recentRound)
         configureHierarchy()
         configureLayout()
         configureView()
@@ -124,7 +127,6 @@ class LottoViewController: UIViewController, ViewConfiguration {
         infoLabel.font = UIFont.systemFont(ofSize: 14)
         
         dateLabel.textColor = .gray
-        dateLabel.text = "2020-05-30 추첨" // data
         dateLabel.font = UIFont.systemFont(ofSize: 12)
         
         lineView.backgroundColor = .lightGray
@@ -132,7 +134,6 @@ class LottoViewController: UIViewController, ViewConfiguration {
         titleLabel.text = "당첨결과"
         titleLabel.font = UIFont.systemFont(ofSize: 22)
         
-        roundLabel.text = "913회" // data
         roundLabel.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
         roundLabel.textColor = .systemYellow
         
@@ -142,19 +143,25 @@ class LottoViewController: UIViewController, ViewConfiguration {
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         
-        for i in 0..<numberLabels.count {
-            if i == 6 {
-                configurePlusStyle(numberLabels[i])
-            } else {
-                configureBallStyle(numberLabels[i])
-            }
-        }
-        
-        // pickerView
         pickerView.selectRow(recentRound - 1, inComponent: 0, animated: true)
     }
     
-    func configurePlusStyle(_ label: UILabel) {
+    private func configureLottoDataView() {
+        if let lottoData {
+            roundLabel.text = String(lottoData.drwNo)
+            dateLabel.text = "\(lottoData.drwNoDate) 추첨"
+            configureBallStyle(numberLabels[0], number: lottoData.drwtNo1)
+            configureBallStyle(numberLabels[1], number: lottoData.drwtNo2)
+            configureBallStyle(numberLabels[2], number: lottoData.drwtNo3)
+            configureBallStyle(numberLabels[3], number: lottoData.drwtNo4)
+            configureBallStyle(numberLabels[4], number: lottoData.drwtNo5)
+            configureBallStyle(numberLabels[5], number: lottoData.drwtNo6)
+            configurePlusStyle(numberLabels[6])
+            configureBallStyle(numberLabels[7], number: lottoData.bnusNo)
+        }
+    }
+    
+    private func configurePlusStyle(_ label: UILabel) {
         label.backgroundColor = .white
         label.text = "+"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
@@ -162,9 +169,9 @@ class LottoViewController: UIViewController, ViewConfiguration {
         label.textAlignment = .center
     }
     
-    func configureBallStyle(_ label: UILabel) {
-        label.backgroundColor = .blue
-        label.text = "23"
+    private func configureBallStyle(_ label: UILabel, number: Int) {
+        label.backgroundColor = createBallColor(number)
+        label.text = String(number)
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         label.textAlignment = .center
@@ -172,22 +179,47 @@ class LottoViewController: UIViewController, ViewConfiguration {
         label.layer.cornerRadius = 20
     }
     
-    func getLottoData() {
-        // 반복문으로 넣어주면돼
-        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1154"
-        AF.request(url, method: .get).responseString { response in
-            print(response)
+    private func createBallColor(_ number : Int) -> UIColor {
+        switch number {
+        case 1...10:
+            return .systemYellow
+        case 11...20:
+            return .skyblue
+        case 21...30:
+            return .dahong
+        case 31...40:
+            return .systemGray2
+        default:
+            return .systemGreen
         }
+    }
+    
+    private func getLottoData(round: Int) {
+        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=\(round)"
+        
+        AF.request(url, method: .get).responseDecodable(of: Lotto.self) { response in
+            switch response.result {
+                
+            case .success(let value):
+                self.lottoData = value
+                self.configureLottoDataView()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
 }
 
+// MARK: TextField View
 extension LottoViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         roundTextField.inputView = pickerView
     }
 }
 
-
+// MARK: Picker View
 extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -204,7 +236,7 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         roundTextField.text = String(row + 1)
-        // 서버통신
+        getLottoData(round: row + 1)
     }
     
 }
