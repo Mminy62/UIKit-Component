@@ -31,14 +31,18 @@ class LottoViewController: UIViewController, ViewConfiguration {
     let lineView = UIView()
     let roundLabel = UILabel()
     let titleLabel = UILabel()
-    var numberLabels = (0..<7).map { _ in UILabel() }
+    var numberLabels = (0..<8).map { _ in UILabel() }
     var plusLabel = UILabel()
     let stackView = UIStackView()
     let pickerView = UIPickerView()
+    let recentRound = 1154
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        roundTextField.delegate = self
+        pickerView.delegate = self
+        pickerView.dataSource = self
         
         configureHierarchy()
         configureLayout()
@@ -53,12 +57,11 @@ class LottoViewController: UIViewController, ViewConfiguration {
         view.addSubview(roundLabel)
         view.addSubview(titleLabel)
         view.addSubview(stackView)
-        view.addSubview(pickerView)
-        // stackview - 공 6개
-        for i in 0...numberLabels.count - 2 {
+        
+        // stackview - +까지 공 8개
+        for i in 0...numberLabels.count - 1 {
             stackView.addArrangedSubview(numberLabels[i])
         }
-                
     }
     
     func configureLayout() {
@@ -103,11 +106,6 @@ class LottoViewController: UIViewController, ViewConfiguration {
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
         }
         
-        pickerView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.horizontalEdges.equalToSuperview()
-        }
-        
         for i in 0...numberLabels.count - 1 { // size configure는 공 모두에 넣음
             numberLabels[i].snp.makeConstraints { make in
                 make.width.height.equalTo(40)
@@ -139,18 +137,29 @@ class LottoViewController: UIViewController, ViewConfiguration {
         roundLabel.textColor = .systemYellow
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         
-        numberLabels.forEach { label in
-            configureBallStyle(label)
+        for i in 0..<numberLabels.count {
+            if i == 6 {
+                configurePlusStyle(numberLabels[i])
+            } else {
+                configureBallStyle(numberLabels[i])
+            }
         }
         
-        plusLabel.text = "+"
-        plusLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        
+        // pickerView
+        pickerView.selectRow(recentRound - 1, inComponent: 0, animated: true)
+    }
+    
+    func configurePlusStyle(_ label: UILabel) {
+        label.backgroundColor = .white
+        label.text = "+"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .black
+        label.textAlignment = .center
     }
     
     func configureBallStyle(_ label: UILabel) {
@@ -163,7 +172,6 @@ class LottoViewController: UIViewController, ViewConfiguration {
         label.layer.cornerRadius = 20
     }
     
-    
     func getLottoData() {
         // 반복문으로 넣어주면돼
         let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1154"
@@ -171,6 +179,32 @@ class LottoViewController: UIViewController, ViewConfiguration {
             print(response)
         }
     }
+}
+
+extension LottoViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        roundTextField.inputView = pickerView
+    }
+}
+
+
+extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        recentRound
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        String(row + 1)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        roundTextField.text = String(row + 1)
+        // 서버통신
+    }
     
 }
