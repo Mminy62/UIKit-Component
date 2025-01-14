@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class RankViewController: UIViewController {
+class RankViewController: UIViewController, UITextFieldDelegate {
     private let apiKey = "acfa8d4399a21fe8c04d1fafebc129de"
     var movieData: Movie?
     
@@ -34,6 +34,16 @@ class RankViewController: UIViewController {
         return button
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = .white
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        
+        return activityIndicator
+    }()
+    
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionLayout())
     
     override func viewDidLoad() {
@@ -43,7 +53,9 @@ class RankViewController: UIViewController {
         view.addSubview(textFieldBarView)
         view.addSubview(searchButton)
         view.addSubview(collectionView)
+        view.addSubview(activityIndicator)
         
+        searchTextField.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -93,6 +105,11 @@ class RankViewController: UIViewController {
             make.horizontalEdges.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().offset(-20) // 추가
         }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
     }
     
     func getData(date: String) {
@@ -103,7 +120,6 @@ class RankViewController: UIViewController {
             case .success(let value):
                 self.movieData = value
                 self.collectionView.reloadData()
-                print(value)
                 
             case .failure(let error):
                 print(error)
@@ -116,20 +132,28 @@ class RankViewController: UIViewController {
             getData(date: date)
         }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+    }
 }
 
 extension RankViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        movieData?.boxOfficeResult.dailyBoxOfficeList.count ?? 0
+        if let movieData {
+            activityIndicator.stopAnimating()
+            return movieData.boxOfficeResult.dailyBoxOfficeList.count
+        } else {
+            activityIndicator.startAnimating()
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RankCollectionViewCell.identifier, for: indexPath) as! RankCollectionViewCell
         if let movieList = movieData?.boxOfficeResult.dailyBoxOfficeList {
             cell.configureData(row: movieList[indexPath.item])
-        } else {
-            print("No data")
         }
         return cell
     }
