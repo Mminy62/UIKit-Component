@@ -21,3 +21,12 @@ extension Date {
         return dateformatter.string(from: self)
     }
 }
+
+extension String {
+    func convertToDate(format: String) -> Date {
+        let dateformatter = Date.dateformatter
+        dateformatter.dateFormat = format
+        dateformatter.locale = Locale(identifier: "ko_KR")
+        return dateformatter.date(from: self) ?? Date()
+    }
+}

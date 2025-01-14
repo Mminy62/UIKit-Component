@@ -21,7 +21,7 @@ class LottoViewController: UIViewController, ViewConfiguration {
     let stackView = UIStackView()
     let pickerView = UIPickerView()
     let bonusLabel = UILabel()
-    let recentRound = 1154
+    lazy var recentRound = 1154 + calculatedRecentDay()
     var lottoData: Lotto?
     
     override func viewDidLoad() {
@@ -206,6 +206,27 @@ class LottoViewController: UIViewController, ViewConfiguration {
             }
         }
         
+    }
+    
+    func calculatedRecentDay() -> Int {
+        let calendar = Calendar.current
+        
+        // 기준 날짜 설정 - 1154회(25.01.11) // 확실하게 일요일 기준 일주일로
+        var standDayComponents = DateComponents()
+        standDayComponents.day = 12
+        standDayComponents.month = 1
+        standDayComponents.year = 2025
+        guard let standDay = calendar.date(from: standDayComponents) else {
+            print("기준 날짜 생성 실패")
+            return 0
+        }
+        
+        let now = Date()
+        
+        // 두 날짜 간의 차이 계산
+        let components = calendar.dateComponents([.day], from: standDay, to: now)
+        guard let diffDays = components.day else { return 0 }
+        return diffDays / 7
     }
 }
 
