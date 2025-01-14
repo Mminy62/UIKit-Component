@@ -20,6 +20,7 @@ class LottoViewController: UIViewController, ViewConfiguration {
     var plusLabel = UILabel()
     let stackView = UIStackView()
     let pickerView = UIPickerView()
+    let bonusLabel = UILabel()
     let recentRound = 1154
     var lottoData: Lotto?
     
@@ -45,6 +46,7 @@ class LottoViewController: UIViewController, ViewConfiguration {
         view.addSubview(roundLabel)
         view.addSubview(titleLabel)
         view.addSubview(stackView)
+        view.addSubview(bonusLabel)
         
         // stackview - +까지 공 8개
         for i in 0...numberLabels.count - 1 {
@@ -94,6 +96,12 @@ class LottoViewController: UIViewController, ViewConfiguration {
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
         }
         
+        bonusLabel.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom).offset(10)
+            make.trailing.equalTo(stackView.snp.trailing)
+            make.height.equalTo(20)
+        }
+        
         for i in 0...numberLabels.count - 1 { // size configure는 공 모두에 넣음
             numberLabels[i].snp.makeConstraints { make in
                 make.width.height.equalTo(40)
@@ -129,6 +137,10 @@ class LottoViewController: UIViewController, ViewConfiguration {
         stackView.distribution = .equalSpacing
         
         pickerView.selectRow(recentRound - 1, inComponent: 0, animated: true)
+        
+        bonusLabel.text = "보너스"
+        bonusLabel.textColor = .darkGray
+        bonusLabel.font = UIFont.systemFont(ofSize: 12)
     }
     
     private func configureLottoDataView() {
