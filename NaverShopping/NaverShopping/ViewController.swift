@@ -60,6 +60,10 @@ class ViewController: UIViewController, ViewConfiguration, UISearchBarDelegate {
         let navAppearance = UINavigationBarAppearance()
         navAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.standardAppearance = navAppearance
+
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .white  // 색상 변경
+        navigationItem.backBarButtonItem = backBarButtonItem
         
         searchBar.searchTextField.textColor = .white
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "브랜드, 상품, 프로필, 태그 등", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray2])
