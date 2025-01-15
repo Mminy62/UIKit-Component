@@ -70,6 +70,7 @@ class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
         
         titleLabel.textColor = .white
         titleLabel.font = UIFont.systemFont(ofSize: 14)
+        titleLabel.numberOfLines = 2
         
         lprice.textColor = .white
         lprice.font = UIFont.systemFont(ofSize: 16, weight: .bold)
