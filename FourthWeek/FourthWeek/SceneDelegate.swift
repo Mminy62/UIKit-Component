@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // info.plist에서 바꾸던걸 코드로 변경
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene) // 빈 유리판
-        let nav = UINavigationController(rootViewController: RandomViewController())
+        let nav = UINavigationController(rootViewController: KakaoBookSearchViewController())
 //        window?.rootViewController = RandomViewController()
         window?.rootViewController = nav
         window?.makeKeyAndVisible() // 화면에 안보이는 오류 방지

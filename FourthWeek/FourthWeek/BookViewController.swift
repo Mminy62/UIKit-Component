@@ -43,14 +43,4 @@ class BookViewController: UIViewController {
         let vc = CodeCollectionViewController()
         present(vc, animated: true)
     }
-
-    
-//    func makeMyButton() -> UIButton {
-//        let button = UIButton()
-//        button.setTitle("BookButton", for: .normal)
-//        button.tintColor = .black
-//        button.backgroundColor = .yellow
-//        return button
-//    }
-//    
 }
