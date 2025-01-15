@@ -141,34 +141,48 @@ class LottoViewController: UIViewController, ViewConfiguration {
         bonusLabel.text = "보너스"
         bonusLabel.textColor = .darkGray
         bonusLabel.font = UIFont.systemFont(ofSize: 12)
+        
+        for i in 0..<numberLabels.count {
+            if i == 6 {
+                configurePlusStyle(numberLabels[i])
+            } else {
+                configureBallStyle(numberLabels[i])
+            }
+        }
     }
     
     private func configureLottoDataView() {
         if let lottoData {
             roundLabel.text = String(lottoData.drwNo)
             dateLabel.text = "\(lottoData.drwNoDate) 추첨"
-            configureBallStyle(numberLabels[0], number: lottoData.drwtNo1)
-            configureBallStyle(numberLabels[1], number: lottoData.drwtNo2)
-            configureBallStyle(numberLabels[2], number: lottoData.drwtNo3)
-            configureBallStyle(numberLabels[3], number: lottoData.drwtNo4)
-            configureBallStyle(numberLabels[4], number: lottoData.drwtNo5)
-            configureBallStyle(numberLabels[5], number: lottoData.drwtNo6)
-            configurePlusStyle(numberLabels[6])
-            configureBallStyle(numberLabels[7], number: lottoData.bnusNo)
+            configureBallView(numberLabels[0], number: lottoData.drwtNo1)
+            configureBallView(numberLabels[1], number: lottoData.drwtNo2)
+            configureBallView(numberLabels[2], number: lottoData.drwtNo3)
+            configureBallView(numberLabels[3], number: lottoData.drwtNo4)
+            configureBallView(numberLabels[4], number: lottoData.drwtNo5)
+            configureBallView(numberLabels[5], number: lottoData.drwtNo6)
+            configureBallView(numberLabels[6], number: nil)
+            configureBallView(numberLabels[7], number: lottoData.bnusNo)
+        }
+    }
+    
+    private func configureBallView(_ label: UILabel, number: Int?) {
+        if let number {
+            label.text = String(number)
+            label.backgroundColor = createBallColor(number)
+        } else {
+            label.text = "+"
+            label.backgroundColor = .white
         }
     }
     
     private func configurePlusStyle(_ label: UILabel) {
-        label.backgroundColor = .white
-        label.text = "+"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textColor = .black
         label.textAlignment = .center
     }
     
-    private func configureBallStyle(_ label: UILabel, number: Int) {
-        label.backgroundColor = createBallColor(number)
-        label.text = String(number)
+    private func configureBallStyle(_ label: UILabel) {
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         label.textAlignment = .center
@@ -205,7 +219,6 @@ class LottoViewController: UIViewController, ViewConfiguration {
                 print(error)
             }
         }
-        
     }
     
     func calculatedRecentDay() -> Int {
