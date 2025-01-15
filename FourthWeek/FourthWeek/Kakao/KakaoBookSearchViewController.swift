@@ -75,12 +75,13 @@ extension KakaoBookSearchViewController: UISearchBarDelegate {
         let headers: HTTPHeaders = [HTTPHeader(name: "Authorization", value: APIKey.kakao)]
         
         AF.request(url, method: .get, headers: headers)
-//            .validate()
+        // 이 상태코드는 API를 제공하는 회사가 주는 처리
+        // success의 기준은 상태코드 200, 200-209가 기본적으로 success로 구분함(alamofire)
+            .validate(statusCode: 200..<300)
             .responseDecodable(of: Book.self) { response in
             switch response.result {
                 
             case .success(let value):
-                dump(value.documents)
                 self.bookList = value.documents
                 self.tableView.reloadData()
             case .failure(let error):

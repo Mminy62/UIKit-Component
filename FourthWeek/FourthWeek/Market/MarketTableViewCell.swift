@@ -8,11 +8,12 @@
 import UIKit
 import SnapKit
 
-class MarketTableViewCell: UITableViewCell {
+class MarketTableViewCell: UITableViewCell, NSCoding {
     
     static let id = "MarketTableViewCell"
     
-    let nameLabel = UILabel()
+//    let nameLabel = UILabel()
+    let nameLabel = BlackRadiusLabel() // 매개변수 없이 호출해도, 알아서 init(frame:)이 호출되도록 설정됨
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,8 +35,8 @@ class MarketTableViewCell: UITableViewCell {
     }
     
     func configureView() {
-        nameLabel.textColor = .brown
-        nameLabel.font = .boldSystemFont(ofSize: 20)
+//        nameLabel.textColor = .brown
+//        nameLabel.font = .boldSystemFont(ofSize: 20)
     }
     
     required init?(coder: NSCoder) {

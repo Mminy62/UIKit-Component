@@ -119,7 +119,6 @@ class RandomViewController: UIViewController, ViewConfiguration {
             case .success(let value):
                 print("success")
                 self.nameLabel.text = value.message
-                // self 없이 불가능 왜? =>
                 
                 print(value.message)
                 print(value.status)
