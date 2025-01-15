@@ -30,17 +30,15 @@ class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureData(item: Data) {
+    func configureData(item: Item) {
+        itemImageView.kf.setImage(with: URL(string:item.image))
         mallLabel.text = item.mallName
         titleLabel.text = item.title
         lprice.text = item.lprice
     }
-//    
+    
     func configureHierarchy() {
         contentView.addSubview(itemImageView)
-        contentView.addSubview(mallLabel)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(lprice)
         contentView.addSubview(stackView)
         [mallLabel, titleLabel, lprice].map {
             self.stackView.addArrangedSubview($0)
@@ -49,23 +47,23 @@ class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
     
     func configureLayout() {
         itemImageView.snp.makeConstraints { make in
-            make.size.equalTo(self.frame.width)
+            make.width.height.equalTo(self.frame.width)
         }
         stackView.snp.makeConstraints { make in
             make.top.equalTo(itemImageView.snp.bottom).offset(5)
-            make.leading.equalTo(itemImageView.snp.leading)
+            make.horizontalEdges.equalTo(itemImageView.snp.horizontalEdges)
         }
     }
     
     func configureView() {
         itemImageView.layer.cornerRadius = 10
         itemImageView.contentMode = .scaleAspectFill
-        itemImageView.image = UIImage(named: "shopping")
+        itemImageView.clipsToBounds = true // 왕중요...
         
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.spacing = 5
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
         
         mallLabel.textColor = .gray
         mallLabel.font = UIFont.systemFont(ofSize: 14)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 import SnapKit
 import Kingfisher
 
@@ -13,6 +14,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     let searchItem: String
     let totalLabel = UILabel()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var shopData: [Item] = []
     
     init(searchItem: String) {
         self.searchItem = searchItem
@@ -26,13 +28,15 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.register(ShoppingCollectionViewCell.self, forCellWithReuseIdentifier: ShoppingCollectionViewCell.id)
+        
         configureHierarchy()
         configureLayout()
         configureView()
+        callRequest()
     }
     
     func configureHierarchy() {
@@ -54,7 +58,9 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         let layout = UICollectionViewFlowLayout()
         let offsetSize = 10
         let lineSpacing = 20
-        let widthSize = Double((Int(view.frame.width) - offsetSize * 2 - lineSpacing) / 2)
+        let viewWidth = UIScreen.main.bounds.width
+        let widthSize = Double((Int(viewWidth) - offsetSize * 2 - lineSpacing) / 2)
+        print("cell:", widthSize)
         layout.itemSize = CGSize(width: widthSize, height: widthSize * 1.5)
         layout.minimumLineSpacing = 10
         collectionView.collectionViewLayout = layout
@@ -62,8 +68,6 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     
     func configureView() {
         navigationItem.title = searchItem
-        
-        // 여기서도 따로 해줘야하는건지?
         let navAppearance = UINavigationBarAppearance()
         navAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.standardAppearance = navAppearance
@@ -74,24 +78,36 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         
         collectionView.backgroundColor = .black
     }
+    
+    func callRequest() {
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)"
+        let header: HTTPHeaders = APIkey.Naver.value
+    
+        AF.request(url, method: .get, headers: header)
+            .validate()
+            .responseDecodable(of: Shop.self) { response in
+            switch response.result {
+                
+            case .success(let value):
+                self.totalLabel.text = "\(value.total) 개의 검색 결과"
+                self.shopData = value.items
+                self.collectionView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension ShoppingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        shopData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShoppingCollectionViewCell.id, for: indexPath) as! ShoppingCollectionViewCell
-        
-        cell.backgroundColor = .brown
-        cell.configureData(item: Data(image: "", mallName: "미나리캠핑카", title: "캠핑카카카카", lprice: "100000"))
+        cell.configureData(item: shopData[indexPath.item])
         return cell
     }
-    
-    
-}
-
-struct Data {
-    let image, mallName, title, lprice: String
 }
