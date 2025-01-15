@@ -8,14 +8,16 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController, ViewConfiguration {
+class ViewController: UIViewController, ViewConfiguration, UISearchBarDelegate {
     let searchBar = UISearchBar()
     let mainImageView = UIImageView()
+    let subtitleLabel = UILabel()
     let infoLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        searchBar.delegate = self
         
         configureHierarchy()
         configureLayout()
@@ -25,6 +27,7 @@ class ViewController: UIViewController, ViewConfiguration {
     func configureHierarchy() {
         view.addSubview(searchBar)
         view.addSubview(mainImageView)
+        view.addSubview(subtitleLabel)
         view.addSubview(infoLabel)
     }
     
@@ -39,10 +42,16 @@ class ViewController: UIViewController, ViewConfiguration {
             make.size.equalTo(200)
         }
         
-        infoLabel.snp.makeConstraints { make in
+        subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(mainImageView.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
+        }
+        
+        infoLabel.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.leading.equalTo(searchBar.snp.leading).offset(30)
+            make.height.equalTo(20)
         }
     }
     
@@ -56,9 +65,26 @@ class ViewController: UIViewController, ViewConfiguration {
         searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "브랜드, 상품, 프로필, 태그 등", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray2])
         searchBar.searchBarStyle = .minimal
         mainImageView.image = UIImage(named: "shopping")
+        subtitleLabel.textColor = .white
+        subtitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        subtitleLabel.text = "쇼핑하구팡"
+        
+        infoLabel.text = "2글자 이상 작성해주세요"
         infoLabel.textColor = .white
-        infoLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        infoLabel.text = "쇼핑하구팡"
+        infoLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        infoLabel.isHidden = true
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let content = searchBar.text, content.count > 1 {
+            infoLabel.isHidden = true
+            view.endEditing(true)
+            navigationController?.pushViewController(ShoppingViewController(searchItem: content), animated: true)
+        } else {
+            infoLabel.isHidden = false
+            view.endEditing(false)
+        }
+    }
+        
 }
 
