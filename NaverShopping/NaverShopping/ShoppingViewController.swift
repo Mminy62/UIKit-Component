@@ -60,7 +60,6 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         configureLayout()
         configureView()
         callRequest()
-        print(ShopButton.allCases)
     }
     
     func configureHierarchy() {
@@ -139,9 +138,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     func callRequest(sortString: String? = nil) {
         
         var url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)&display=100"
-        if let sortString {
-            url += "&sort=\(sortString)"
-        }
+        if let sortString { url += "&sort=\(sortString)" }
         let header: HTTPHeaders = APIkey.Naver.value
         
         AF.request(url, method: .get, headers: header)
@@ -150,7 +147,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
                 switch response.result {
                     
                 case .success(let value):
-                    self.totalLabel.text = "\(value.total) 개의 검색 결과"
+                    self.totalLabel.text = "\(value.total.convertToDecimalString()) 개의 검색 결과"
                     self.shopData = value.items
                     self.collectionView.reloadData()
                     
@@ -167,7 +164,6 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
                 button.isSelected = true
                 button.backgroundColor = .white
                 let type = ShopButton.allCases[sender.tag]
-                print(type.rawValue)
                 callRequest(sortString: type.rawValue)
             }
             else {

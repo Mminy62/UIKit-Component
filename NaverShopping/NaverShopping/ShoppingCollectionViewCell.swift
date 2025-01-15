@@ -34,7 +34,7 @@ class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
         itemImageView.kf.setImage(with: URL(string:item.image))
         mallLabel.text = item.mallName
         titleLabel.text = item.title
-        lprice.text = item.lprice
+        lprice.text = (Int(item.lprice) ?? 0).convertToDecimalString()
     }
     
     func configureHierarchy() {
