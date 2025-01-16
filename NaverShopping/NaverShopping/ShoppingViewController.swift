@@ -39,7 +39,9 @@ class ShoppingViewController: BaseViewController {
         collectionView.register(ShoppingCollectionViewCell.self, forCellWithReuseIdentifier: ShoppingCollectionViewCell.id)
         collectionView.prefetchDataSource = self
 
-        callRequest()
+        NetworkManager.shared.callSearchRequest(searchItem, startPos, sortType) { value in
+            self.successAction(value)
+        }
     }
     
     override func configureHierarchy() {
@@ -95,39 +97,27 @@ class ShoppingViewController: BaseViewController {
         }
     }
     
-    func callRequest() {
-        var url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)&display=30&start=\(startPos)&sort=\(sortType.rawValue)"
-        let header: HTTPHeaders = APIkey.Naver.value
-        
-        AF.request(url, method: .get, headers: header)
-            .validate()
-            .responseDecodable(of: Shop.self) { response in
-                switch response.result {
-                    
-                case .success(let value):
-                    if value.total == 0 {
-                        self.shopData.removeAll()
-                        print("검색 결과가 없습니다")
-                        self.collectionView.reloadData()
-                    } else {
-                        self.shopData.append(contentsOf: value.items)
-                        self.collectionView.reloadData()
-                        if self.startPos == 1 {
-                            self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-                        }
-                    }
-                    
-                    // MARK: isEnd 설정
-                    if value.items.count < 30 {
-                        self.isEnd = true
-                    }
-                    self.totalLabel.text = "\(value.total.convertToDecimalString()) 개의 검색 결과"
-                    
-                case .failure(let error):
-                    print(error)
-                }
+    func successAction(_ value: Shop) {
+        if value.total == 0 {
+            self.shopData.removeAll()
+            print("검색 결과가 없습니다")
+            self.collectionView.reloadData()
+        } else {
+            self.shopData.append(contentsOf: value.items)
+            self.collectionView.reloadData()
+            if self.startPos == 1 {
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
+        }
+        
+        // MARK: isEnd 설정
+        if value.items.count < 30 {
+            self.isEnd = true
+        }
+        self.totalLabel.text = "\(value.total.convertToDecimalString()) 개의 검색 결과"
     }
+    
+
     
     @objc
     func buttonTapped(_ sender: UIButton) {
@@ -149,7 +139,10 @@ class ShoppingViewController: BaseViewController {
                 button.backgroundColor = .black
             }
         }
-        callRequest()
+        
+        NetworkManager.shared.callSearchRequest(searchItem, startPos, sortType) { value in
+            self.successAction(value)
+        }
     }
 }
 
@@ -171,7 +164,10 @@ extension ShoppingViewController: UICollectionViewDataSourcePrefetching {
         for item in indexPaths {
             if !shopData.isEmpty && shopData.count - 2 == item.row && !isEnd {
                 startPos = shopData.count + 1
-                callRequest()
+                
+                NetworkManager.shared.callSearchRequest(searchItem, startPos, sortType) { value in
+                    self.successAction(value)
+                }
             }
         }
     }
