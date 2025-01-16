@@ -16,7 +16,7 @@ import Kingfisher
 //    let sort: String
 //}
 
-class ShoppingViewController: UIViewController, ViewConfiguration {
+class ShoppingViewController: BaseViewController, ViewConfiguration {
     let totalLabel = UILabel()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let buttonStackView = UIStackView()
@@ -45,14 +45,11 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         collectionView.dataSource = self
         collectionView.register(ShoppingCollectionViewCell.self, forCellWithReuseIdentifier: ShoppingCollectionViewCell.id)
         collectionView.prefetchDataSource = self
-        
-        configureHierarchy()
-        configureLayout()
-        configureView()
+
         callRequest()
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(totalLabel)
         view.addSubview(collectionView)
         view.addSubview(buttonStackView)
@@ -61,7 +58,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         }
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         totalLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.equalToSuperview().offset(10)
@@ -87,7 +84,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         collectionView.collectionViewLayout = layout
     }
     
-    func configureView() {
+    override func configureView() {
         navigationItem.title = searchItem
         navigationItem.standardAppearance = NavigationAppearance.shared.textAttribute
         

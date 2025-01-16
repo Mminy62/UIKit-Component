@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController, ViewConfiguration, UISearchBarDelegate {
+class ViewController: BaseViewController, UISearchBarDelegate {
     let searchBar = UISearchBar()
     let mainImageView = UIImageView()
     let subtitleLabel = UILabel()
@@ -16,22 +16,17 @@ class ViewController: UIViewController, ViewConfiguration, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         searchBar.delegate = self
-        
-        configureHierarchy()
-        configureLayout()
-        configureView()
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(searchBar)
         view.addSubview(mainImageView)
         view.addSubview(subtitleLabel)
         view.addSubview(infoLabel)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.horizontalEdges.equalToSuperview().inset(10)
@@ -55,11 +50,9 @@ class ViewController: UIViewController, ViewConfiguration, UISearchBarDelegate {
         }
     }
     
-    func configureView() {
+    override func configureView() {
         self.navigationItem.title = "도봉러의 쇼핑쇼핑"
-        let navAppearance = UINavigationBarAppearance()
-        navAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.standardAppearance = navAppearance
+        navigationItem.standardAppearance = NavigationAppearance.shared.textAttribute
 
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .white  // 색상 변경
@@ -89,6 +82,5 @@ class ViewController: UIViewController, ViewConfiguration, UISearchBarDelegate {
             view.endEditing(false)
         }
     }
-        
 }
 
