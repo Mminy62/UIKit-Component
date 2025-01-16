@@ -13,7 +13,6 @@ import Kingfisher
 //struct SearchInfo {
 //    let searchItem: String
 //    let shopData: [Item]
-//    let page: Int
 //    let sort: String
 //}
 
@@ -25,8 +24,9 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     
     let searchItem: String
     var shopData: [Item] = []
-    var page: Int = 1
     var sortType: SortType = SortType.sim
+    var isEnd: Bool = false
+    var startPos: Int = 1
     
     init(searchItem: String) {
         self.searchItem = searchItem
@@ -44,6 +44,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ShoppingCollectionViewCell.self, forCellWithReuseIdentifier: ShoppingCollectionViewCell.id)
+        collectionView.prefetchDataSource = self
         
         configureHierarchy()
         configureLayout()
@@ -125,7 +126,8 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     }
     
     func callRequest() {
-        var url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)&display=30&start=\(page)&sort=\(sortType.rawValue)"
+        print(shopData.count, startPos, sortType.rawValue)
+        var url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)&display=30&start=\(startPos)&sort=\(sortType.rawValue)"
         let header: HTTPHeaders = APIkey.Naver.value
         
         AF.request(url, method: .get, headers: header)
@@ -140,11 +142,15 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
                         self.collectionView.reloadData()
                     } else {
                         self.shopData.append(contentsOf: value.items)
-                        
-                        if self.page == 1 { // 요청을 보내는 이유는 첫 데이터를 받아와야 하는 것이니까... 당연
-                            self.collectionView.reloadData()
+                        self.collectionView.reloadData()
+                        if self.startPos == 1 {
                             self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
                         }
+                    }
+                    
+                    // isEnd 설정
+                    if value.items.count < 30 {
+                        self.isEnd = true
                     }
                     
                     self.totalLabel.text = "\(value.total.convertToDecimalString()) 개의 검색 결과"
@@ -161,12 +167,13 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
             if button == sender {
                 button.isSelected = true
                 button.backgroundColor = .white
+                
                 let type = SortType.allCases[sender.tag]
-                if sortType != type { // 다른 버튼을 눌렀을 때만 요청
+                if sortType != type { // 다른 버튼을 눌렀을 때, shopData 지우기
                     sortType = type
-                    page = 1
+                    startPos = 1
+                    isEnd = false
                     shopData.removeAll()
-                    callRequest()
                 }
             }
             else {
@@ -174,6 +181,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
                 button.backgroundColor = .black
             }
         }
+        callRequest()
     }
 }
 
@@ -191,7 +199,13 @@ extension ShoppingViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension ShoppingViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        // prefetching 되는 시점
+        
+        for item in indexPaths {
+            if !shopData.isEmpty && shopData.count - 2 == item.row && !isEnd {
+                startPos = shopData.count + 1
+                callRequest()
+            }
+        }
         
     }
     
