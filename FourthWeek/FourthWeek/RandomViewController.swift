@@ -102,34 +102,7 @@ class RandomViewController: UIViewController, ViewConfiguration {
 
     @objc
     func randomButtonTapped() {
-        // 버튼 누르면 랜덤으로 강아지 나오게
-        // 요청 url, responseString - response를 string으로 받는 함수
-        let url = "https://dog.ceo/api/breeds/image/random"
-//        AF.request(url, method: .get).responseString { value in
-//            print(value)
-//        }
-        
-        print("====1111=====")
-        // struct로 decoding 된 상태
-        AF.request(url, method: .get).responseDecodable(of: Dog.self) { response in
-            print("====2222=====")
-            
-            switch response.result {
-                
-            case .success(let value):
-                print("success")
-                self.nameLabel.text = value.message
-                
-                print(value.message)
-                print(value.status)
-            case .failure(let error):
-                print("error")
-                print(error)
-            }
-            print("====3333=====")
-        }
-        
-        print("====4444=====")
+        NetworkManager.shared.randomUser(completionHandler: {})
     }
     
     @objc

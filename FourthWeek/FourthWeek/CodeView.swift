@@ -13,8 +13,6 @@ class CodeView: BaseView {
     
     func createCollectionView() -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionLayout())
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.register(CodeCollectionViewCell.self, forCellWithReuseIdentifier: CodeCollectionViewCell.identifier)
         return collectionView
     }

@@ -7,23 +7,50 @@
 
 import UIKit
 import SnapKit
+import Network
+
 
 class CodeCollectionViewController: UIViewController {
     
     var mainView = CodeView()
-    // Custom View 를 가져올 수 있음, super X (apple의 이 메서드의 super는 애플 view이기 때문에, mainView가 제대로 로드 안될 수 있음)
-    // loadView: VC의 self.view 인 메인 뷰에 로드할 때 호출하는 함수
+    let monitor = NWPathMonitor()
+    
     override func loadView() {
-        print(#function)
         view = mainView
     }
     override func viewDidLoad() {
-        print(#function)
         super.viewDidLoad()
-
+        UserDefaultsManager.shared.age = 50
+        NetworkManager.shared.randomUser { name in
+            print("\(name) 입니다.")
+        }
+        
+        
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
+        
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                
+                DispatchQueue.main.async {
+                    print("connet")
+                }
+            } else {
+                
+                DispatchQueue.main.async {
+                    print("nope")
+                }
+            }
+        }
+        
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
+    
+    deinit {
+        monitor.cancel()
+    }
+    
 }
 
 extension CodeCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
