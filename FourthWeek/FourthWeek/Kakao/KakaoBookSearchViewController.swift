@@ -149,7 +149,7 @@ extension KakaoBookSearchViewController: UITableViewDelegate, UITableViewDataSou
 
 
 extension KakaoBookSearchViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) { //
         //        print(#function, indexPaths)
         // 20
         for item in indexPaths {

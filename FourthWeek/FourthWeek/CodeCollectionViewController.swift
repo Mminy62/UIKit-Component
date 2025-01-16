@@ -8,42 +8,25 @@
 import UIKit
 import SnapKit
 
-class CodeCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CodeCollectionViewController: UIViewController {
     
-//    let collectionView = UICollectionView()
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionLayout())
-    
+    var mainView = CodeView()
+    // Custom View 를 가져올 수 있음, super X (apple의 이 메서드의 super는 애플 view이기 때문에, mainView가 제대로 로드 안될 수 있음)
+    // loadView: VC의 self.view 인 메인 뷰에 로드할 때 호출하는 함수
+    override func loadView() {
+        print(#function)
+        view = mainView
+    }
     override func viewDidLoad() {
+        print(#function)
         super.viewDidLoad()
 
-        view.backgroundColor = .white
-        view.addSubview(collectionView)
-        
-        // delegate, datasource 선언
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        // cell register 해줘야함
-        // 코드 베이스이기 때문에 UINib이 아닌 CollectionViewCell 클래스 자체를 넣어줘야한다.
-        //
-        collectionView.register(CodeCollectionViewCell.self, forCellWithReuseIdentifier: CodeCollectionViewCell.identifier)
-        
-        // collectionView layout 안짜나?
+        mainView.collectionView.delegate = self
+        mainView.collectionView.dataSource = self
     }
-    
-    func createCollectionLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 50, height: 50)
-        layout.scrollDirection = .vertical
-        return layout
-    }
-    
-    
-    
+}
+
+extension CodeCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         100
     }
@@ -54,5 +37,4 @@ class CodeCollectionViewController: UIViewController, UICollectionViewDelegate, 
         cell.bookCoverImageView.layer.cornerRadius = 10
         return cell
     }
-    
 }
