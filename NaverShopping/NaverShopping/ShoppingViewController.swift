@@ -20,7 +20,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     let totalLabel = UILabel()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let buttonStackView = UIStackView()
-    let buttons = (0..<4).map {_ in UIButton()}
+    let buttons = (0..<4).map {_ in SortButtonView()}
     
     let searchItem: String
     var shopData: [Item] = []
@@ -76,11 +76,6 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
             make.horizontalEdges.equalToSuperview().inset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
-        for i in 0..<buttons.count {
-            buttons[i].snp.makeConstraints { make in
-                make.height.equalTo(40)
-            }
-        }
         
         let layout = UICollectionViewFlowLayout()
         let offsetSize = 10
@@ -94,9 +89,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
     
     func configureView() {
         navigationItem.title = searchItem
-        let navAppearance = UINavigationBarAppearance()
-        navAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.standardAppearance = navAppearance
+        navigationItem.standardAppearance = NavigationAppearance.shared.textAttribute
         
         totalLabel.textColor = .systemGreen
         totalLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -107,22 +100,13 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         buttonStackView.distribution = .fillProportionally
         buttonStackView.spacing = 10
         let buttonTypes = SortType.allCases
+        
         for i in 0..<buttons.count {
-            configureSortButton(buttons[i], title: buttonTypes[i].title)
+            buttons[i].setTitle(" \(buttonTypes[i].title) ", for: .normal)
             buttons[i].addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
             buttons[i].tag = i
         }
-    }
     
-    private func configureSortButton(_ button: UIButton, title: String) {
-        button.setTitle(" \(title) ", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.black, for: .selected)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.backgroundColor = .black
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
     }
     
     func callRequest() {
