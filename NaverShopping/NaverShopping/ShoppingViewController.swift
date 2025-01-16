@@ -10,34 +10,23 @@ import Alamofire
 import SnapKit
 import Kingfisher
 
-enum ShopButton: String, CaseIterable {
-    case sim
-    case date
-    case dsc
-    case asc
-    
-    var title: String {
-        switch self {
-        case .sim:
-            "정확도"
-        case .date:
-            "날짜순"
-        case .dsc:
-            "가격높은순"
-        case .asc:
-            "가격낮은순"
-        }
-    }
-}
-
+//struct SearchInfo {
+//    let searchItem: String
+//    let shopData: [Item]
+//    let page: Int
+//    let sort: String
+//}
 
 class ShoppingViewController: UIViewController, ViewConfiguration {
-    let searchItem: String
     let totalLabel = UILabel()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let buttonStackView = UIStackView()
     let buttons = (0..<4).map {_ in UIButton()}
+    
+    let searchItem: String
     var shopData: [Item] = []
+    var page: Int = 1
+    var sortType: SortType = SortType.sim
     
     init(searchItem: String) {
         self.searchItem = searchItem
@@ -116,7 +105,7 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         buttonStackView.axis = .horizontal
         buttonStackView.distribution = .fillProportionally
         buttonStackView.spacing = 10
-        let buttonTypes = ShopButton.allCases
+        let buttonTypes = SortType.allCases
         for i in 0..<buttons.count {
             configureSortButton(buttons[i], title: buttonTypes[i].title)
             buttons[i].addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -135,10 +124,8 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
         button.layer.borderWidth = 1
     }
     
-    func callRequest(sortString: String? = nil) {
-        
-        var url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)&display=100"
-        if let sortString { url += "&sort=\(sortString)" }
+    func callRequest() {
+        var url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)&display=30&start=\(page)&sort=\(sortType.rawValue)"
         let header: HTTPHeaders = APIkey.Naver.value
         
         AF.request(url, method: .get, headers: header)
@@ -147,9 +134,20 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
                 switch response.result {
                     
                 case .success(let value):
+                    if value.total == 0 { // data가 없을 때
+                        self.shopData.removeAll()
+                        print("검색 결과가 없습니다")
+                        self.collectionView.reloadData()
+                    } else {
+                        self.shopData.append(contentsOf: value.items)
+                        
+                        if self.page == 1 { // 요청을 보내는 이유는 첫 데이터를 받아와야 하는 것이니까... 당연
+                            self.collectionView.reloadData()
+                            self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+                        }
+                    }
+                    
                     self.totalLabel.text = "\(value.total.convertToDecimalString()) 개의 검색 결과"
-                    self.shopData = value.items
-                    self.collectionView.reloadData()
                     
                 case .failure(let error):
                     print(error)
@@ -163,8 +161,13 @@ class ShoppingViewController: UIViewController, ViewConfiguration {
             if button == sender {
                 button.isSelected = true
                 button.backgroundColor = .white
-                let type = ShopButton.allCases[sender.tag]
-                callRequest(sortString: type.rawValue)
+                let type = SortType.allCases[sender.tag]
+                if sortType != type { // 다른 버튼을 눌렀을 때만 요청
+                    sortType = type
+                    page = 1
+                    shopData.removeAll()
+                    callRequest()
+                }
             }
             else {
                 button.isSelected = false
@@ -184,4 +187,13 @@ extension ShoppingViewController: UICollectionViewDelegate, UICollectionViewData
         cell.configureData(item: shopData[indexPath.item])
         return cell
     }
+}
+
+extension ShoppingViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        // prefetching 되는 시점
+        
+    }
+    
+    
 }
