@@ -8,9 +8,10 @@
 import Foundation
 
 extension Int {
+    static let numberFormatter = NumberFormatter()
+    
     func convertToDecimalString() -> String {
-        let numberFormatter: NumberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter.string(for: self)!
+        Int.numberFormatter.numberStyle = .decimal
+        return Int.numberFormatter.string(for: self)!
     }
 }

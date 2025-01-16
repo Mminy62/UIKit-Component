@@ -10,12 +10,6 @@ import Alamofire
 import SnapKit
 import Kingfisher
 
-//struct SearchInfo {
-//    let searchItem: String
-//    let shopData: [Item]
-//    let sort: String
-//}
-
 class ShoppingViewController: BaseViewController, ViewConfiguration {
     let totalLabel = UILabel()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -39,7 +33,6 @@ class ShoppingViewController: BaseViewController, ViewConfiguration {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -187,8 +180,5 @@ extension ShoppingViewController: UICollectionViewDataSourcePrefetching {
                 callRequest()
             }
         }
-        
     }
-    
-    
 }

@@ -11,13 +11,11 @@
 		D23FE5172D37955700EBA0CD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D23FE5162D37955700EBA0CD /* Alamofire */; };
 		D23FE51A2D37956100EBA0CD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D23FE5192D37956100EBA0CD /* SnapKit */; };
 		D23FE5982D37EE4900EBA0CD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D23FE5972D37EE4300EBA0CD /* .gitignore */; };
-		D2C23FA02D3929AF0038DF0C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C23F9F2D3929AF0038DF0C /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D23FE4EA2D37903B00EBA0CD /* NaverShopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaverShopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23FE5972D37EE4300EBA0CD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		D2C23F9F2D3929AF0038DF0C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -58,7 +56,6 @@
 		D23FE4E12D37903B00EBA0CD = {
 			isa = PBXGroup;
 			children = (
-				D2C23F9F2D3929AF0038DF0C /* BaseViewController.swift */,
 				D23FE5972D37EE4300EBA0CD /* .gitignore */,
 				D23FE4EC2D37903B00EBA0CD /* NaverShopping */,
 				D23FE4EB2D37903B00EBA0CD /* Products */,
@@ -156,7 +153,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C23FA02D3929AF0038DF0C /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

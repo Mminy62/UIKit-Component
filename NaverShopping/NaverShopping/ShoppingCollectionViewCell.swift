@@ -9,25 +9,17 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
+class ShoppingCollectionViewCell: BaseCollectionViewCell {
     static let id = "ShoppingCollectionViewCell"
     
     let itemImageView = UIImageView()
     let mallLabel = UILabel()
     let titleLabel = UILabel()
     let lprice = UILabel()
-    let stackView = UIStackView()
+//    let stackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .black
-        configureHierarchy()
-        configureLayout()
-        configureView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func configureData(item: Item) {
@@ -37,7 +29,7 @@ class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
         lprice.text = (Int(item.lprice) ?? 0).convertToDecimalString()
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         contentView.addSubview(itemImageView)
         contentView.addSubview(stackView)
         [mallLabel, titleLabel, lprice].map {
@@ -45,7 +37,7 @@ class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
         }
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         itemImageView.snp.makeConstraints { make in
             make.width.height.equalTo(self.frame.width)
         }
@@ -55,10 +47,10 @@ class ShoppingCollectionViewCell: UICollectionViewCell, ViewConfiguration {
         }
     }
     
-    func configureView() {
+    override func configureView() {
         itemImageView.layer.cornerRadius = 10
         itemImageView.contentMode = .scaleAspectFill
-        itemImageView.clipsToBounds = true // 왕중요...
+        itemImageView.clipsToBounds = true
         
         stackView.axis = .vertical
         stackView.alignment = .leading
