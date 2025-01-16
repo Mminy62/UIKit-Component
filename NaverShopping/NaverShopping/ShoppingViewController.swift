@@ -10,7 +10,7 @@ import Alamofire
 import SnapKit
 import Kingfisher
 
-class ShoppingViewController: BaseViewController, ViewConfiguration {
+class ShoppingViewController: BaseViewController {
     let totalLabel = UILabel()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let buttonStackView = UIStackView()
@@ -80,12 +80,9 @@ class ShoppingViewController: BaseViewController, ViewConfiguration {
     override func configureView() {
         navigationItem.title = searchItem
         navigationItem.standardAppearance = NavigationAppearance.shared.textAttribute
-        
         totalLabel.textColor = .systemGreen
         totalLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        
         collectionView.backgroundColor = .black
-        
         buttonStackView.axis = .horizontal
         buttonStackView.distribution = .fillProportionally
         buttonStackView.spacing = 10
@@ -96,11 +93,9 @@ class ShoppingViewController: BaseViewController, ViewConfiguration {
             buttons[i].addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
             buttons[i].tag = i
         }
-    
     }
     
     func callRequest() {
-        print(shopData.count, startPos, sortType.rawValue)
         var url = "https://openapi.naver.com/v1/search/shop.json?query=\(searchItem)&display=30&start=\(startPos)&sort=\(sortType.rawValue)"
         let header: HTTPHeaders = APIkey.Naver.value
         
@@ -110,7 +105,7 @@ class ShoppingViewController: BaseViewController, ViewConfiguration {
                 switch response.result {
                     
                 case .success(let value):
-                    if value.total == 0 { // data가 없을 때
+                    if value.total == 0 {
                         self.shopData.removeAll()
                         print("검색 결과가 없습니다")
                         self.collectionView.reloadData()
@@ -122,11 +117,10 @@ class ShoppingViewController: BaseViewController, ViewConfiguration {
                         }
                     }
                     
-                    // isEnd 설정
+                    // MARK: isEnd 설정
                     if value.items.count < 30 {
                         self.isEnd = true
                     }
-                    
                     self.totalLabel.text = "\(value.total.convertToDecimalString()) 개의 검색 결과"
                     
                 case .failure(let error):

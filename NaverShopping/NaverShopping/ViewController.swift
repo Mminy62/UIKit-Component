@@ -12,7 +12,10 @@ class ViewController: BaseViewController, UISearchBarDelegate {
     let searchBar = UISearchBar()
     let mainImageView = UIImageView()
     let subtitleLabel = UILabel()
-    let infoLabel = UILabel()
+    lazy var alert = UIAlertController().createAlert() {
+        print("alert 통신 끝")
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +26,6 @@ class ViewController: BaseViewController, UISearchBarDelegate {
         view.addSubview(searchBar)
         view.addSubview(mainImageView)
         view.addSubview(subtitleLabel)
-        view.addSubview(infoLabel)
     }
     
     override func configureLayout() {
@@ -42,12 +44,6 @@ class ViewController: BaseViewController, UISearchBarDelegate {
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
         }
-        
-        infoLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(10)
-            make.leading.equalTo(searchBar.snp.leading).offset(30)
-            make.height.equalTo(20)
-        }
     }
     
     override func configureView() {
@@ -65,22 +61,25 @@ class ViewController: BaseViewController, UISearchBarDelegate {
         subtitleLabel.textColor = .white
         subtitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         subtitleLabel.text = "쇼핑하구팡"
-        
-        infoLabel.text = "2글자 이상 작성해주세요"
-        infoLabel.textColor = .white
-        infoLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        infoLabel.isHidden = true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let content = searchBar.text, content.count > 1 {
-            infoLabel.isHidden = true
             view.endEditing(true)
             navigationController?.pushViewController(ShoppingViewController(searchItem: content), animated: true)
         } else {
-            infoLabel.isHidden = false
+            present(alert, animated: true)
             view.endEditing(false)
         }
     }
 }
 
+
+extension UIAlertController {
+    func createAlert(completionHandler: @escaping () -> ()) -> UIViewController {
+        let alert = UIAlertController(title: "두 글자 이상 작성해주세요", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive))
+        completionHandler()
+        return alert
+    }
+}
