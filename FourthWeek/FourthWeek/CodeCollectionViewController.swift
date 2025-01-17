@@ -21,8 +21,8 @@ class CodeCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UserDefaultsManager.shared.age = 50
-        NetworkManager.shared.randomUser { name in
-            print("\(name) 입니다.")
+        NetworkManager.shared.randomUser {
+            print("통신 끝")
         }
         
         

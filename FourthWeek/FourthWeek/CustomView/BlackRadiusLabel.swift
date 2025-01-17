@@ -56,7 +56,7 @@ class BlackRadiusLabel: BaseLabel {
         // super.init을 먼저 해줘야함
         super.init(frame: .zero) // == 아무 위치도 안잡은거랑 같은 말임
         font = .boldSystemFont(ofSize: 15)
-        textColor = .white
+        textColor = color
         backgroundColor = .black
         clipsToBounds = true
         layer.cornerRadius = 10

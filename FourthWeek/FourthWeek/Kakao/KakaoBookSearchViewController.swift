@@ -76,40 +76,21 @@ extension KakaoBookSearchViewController: UISearchBarDelegate {
     
     func callRequest() {
         print(#function)
-        let url = "https://dapi.kakao.com/v3/search/book?query=\(searchItem)&size=20&page=\(page)"
-        let headers: HTTPHeaders = [HTTPHeader(name: "Authorization", value: APIKey.kakao)]
-        
-        AF.request(url, method: .get, headers: headers)
-        // 이 상태코드는 API를 제공하는 회사가 주는 처리
-        // success의 기준은 상태코드 200, 200-209가 기본적으로 success로 구분함(alamofire)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: Book.self) { response in
-                switch response.result {
+        NetworkManager.shared.callKakaoBookAPI(query: searchItem, page: page) { value in
+            self.isEnd = value.meta.is_end
+            if value.documents.count == 0 { // data가 없을 때
+                self.bookList.removeAll()
+                print("검색 결과가 없습니다")
+                self.tableView.reloadData()
+            } else {
+                self.bookList.append(contentsOf: value.documents)
+                self.tableView.reloadData()
+                if self.page == 1 {
                     
-                case .success(let value):
-                    self.isEnd = value.meta.is_end
-                    if value.documents.count == 0 { // data가 없을 때
-                        self.bookList.removeAll()
-                        print("검색 결과가 없습니다")
-                        self.tableView.reloadData()
-                    } else {
-                        self.bookList.append(contentsOf: value.documents)
-                        if self.page == 1 {
-                            self.tableView.reloadData()
-                            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true) // data가 있어야하는 scrollToRow
-                        }
-                    }
-        
-                    //                    self.bookList.append(contentsOf: value.documents)
-                    //                    self.tableView.reloadData()
-                    //                    if self.page == 1 {
-                    //                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                    //                    }
-                    
-                case .failure(let error):
-                    print(error)
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true) // data가 있어야하는 scrollToRow
                 }
             }
+        }
     }
     
     
@@ -156,6 +137,7 @@ extension KakaoBookSearchViewController: UITableViewDataSourcePrefetching {
             print(item.row)
             if !bookList.isEmpty && bookList.count - 2 == item.row && !isEnd {
                 page += 1
+                print("page:", page)
                 callRequest()
             }
         }
